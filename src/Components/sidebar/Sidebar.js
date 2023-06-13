@@ -30,16 +30,15 @@ const LinkItems = [
 ];
 const sidebar = () => {
   return (
-    <Flex h={"100%"} w={"100%"} m={0} flexDirection="column">
+    <Flex h={"100%"} w={"100%"} m={0} flexDirection="column" p={2}>
       <Box
-        border={"1px solid"}
         w={"100%"}
         display={"flex"}
-        alignItems="center"
+        alignItems="start"
         justifyContent="center">
-        <Image src={logo.src} w={"auto"} h={"40px"} alt="logo" border={"1px solid red"}/>
+        <Image src={logo.src} w={"auto"} h={"40px"} alt="logo"/>
       </Box>
-      <Flex border={"1px solid red"} h={"100%"} w={"100%"} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+      <Flex pt={5} h={"100%"} w={"100%"} display={'flex'} alignItems={'start'} justifyContent={'center'}>
         <List >
            {LinkItems.map((item, index) => (
             <ListItem p={4} _hover={{ bg: "teal.600" }}>{item.icon}</ListItem>

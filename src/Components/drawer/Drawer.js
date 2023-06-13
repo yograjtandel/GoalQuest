@@ -22,8 +22,8 @@ function CustomDrawer(props) {
         placement="right"
         onClose={props.onClose}
         finalFocusRef={props.btnRef}
-        size={"lg"}
-      >
+         size={props.size || "lg"}
+        >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
