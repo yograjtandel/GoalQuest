@@ -15,7 +15,7 @@ import { useRef, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import ParentChildTask from "../Task/ParentChildTask";
 
-const header = () => {
+const header = (props) => {
   //   const [newTicket, setNewTicket] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
@@ -29,7 +29,7 @@ const header = () => {
         display={"Flex"}
         justifyContent={"space-between"}
         alignItems={"center"}>
-        <Heading fontSize={"1.4rem"}>All Tickets</Heading>
+        <Heading fontSize={"1.4rem"}>{props.title}</Heading>
         <Box display={"flex"}>
           <Button size={"md"} ref={btnRef} colorScheme="teal" onClick={onOpen} variant='outline'lineHeight={0}>
             New <BiPlus m={0} p={0} />

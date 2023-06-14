@@ -1,4 +1,5 @@
 import {
+  Flex,
   Button,
   Input,
   Select,
@@ -14,20 +15,19 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
 import Drawer from "../drawer/Drawer";
 import { useRef, useState } from "react";
-import { AddIcon } from "@chakra-ui/icons";
 import InputWrapper from "../form/InputWrapper";
 import Logtime from "./LogTime";
 import ParentChildTask from "./ParentChildTask";
-
+import Cards from "../card/Card";
+// import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 const NewTask = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLogtime, setIsLogtime] = useState(false);
@@ -81,17 +81,14 @@ const NewTask = () => {
         </Select>
       </InputWrapper>
       <Box>
-        <Accordion shadow={"xl"} allowToggle={'true'} mt={2}>
+        <Accordion shadow={"xl"} allowToggle={"true"} mt={2}>
           <AccordionItem>
             <h2>
               <AccordionButton
                 px={"4"}
-                ref={btnRef}
                 bg={"none"}
-                onClick={parentChildTaskHandler}
-                _hover={{ bg: "none" }}
-                _active={{bg:'red'}}
-                _focus={{bg:'red'}}
+                borderBottom={"1px solid"}
+                borderColor={"gray.300"}
               >
                 <Box as="span" flex="1" textAlign="left">
                   Parent Task
@@ -99,7 +96,23 @@ const NewTask = () => {
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-            {/* <AccordionPanel pb={4}></AccordionPanel> */}
+            <AccordionPanel pb={4}>
+              <Box w={"100%"} display={"flex"} justifyContent={"end"} mb={2}>
+                <Button
+                  size={"sm"}
+                  ref={btnRef}
+                  onClick={parentChildTaskHandler}
+                  bg={"secondary.400"}
+                  color={"white"}
+                  _hover={{bg: "primary.400"}}>
+                  <AddIcon />
+                </Button>
+              </Box>
+              <Flex justifyContent={"space-between"} flexWrap={"wrap"}>
+                <Cards/>
+                <Cards/>
+              </Flex>
+            </AccordionPanel>
           </AccordionItem>
           <AccordionItem>
             <h2>
@@ -108,7 +121,8 @@ const NewTask = () => {
                 ref={btnRef}
                 bg={"none"}
                 onClick={parentChildTaskHandler}
-                _hover={{ bg: "none" }}
+                borderBottom={"1px solid"}
+                borderColor={"gray.300"}
               >
                 <Box as="span" flex="1" textAlign="left">
                   Child Task
@@ -118,10 +132,12 @@ const NewTask = () => {
             </h2>
             {/* <AccordionPanel pb={4}></AccordionPanel> */}
           </AccordionItem>
-
           <AccordionItem>
             <h2>
-              <AccordionButton>
+              <AccordionButton
+                borderBottom={"1px solid"}
+                borderColor={"gray.300"}
+              >
                 <Box as="span" flex="1" textAlign="left">
                   Time Logs
                 </Box>

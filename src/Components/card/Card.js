@@ -2,12 +2,10 @@ import {
   Card,
   CardBody,
   Text,
-  Box,
   Flex,
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
 import Drawer from "../drawer/Drawer";
 import { BiStar, BiUser, BiCircle } from "react-icons/bi";
 import NewTask from "../Task/NewTask";
@@ -24,10 +22,11 @@ const Cards = (props) => {
         onClick={() => {
           onOpen();
         }}
-        _hover={ {
-          cursor:"pointer",
-          shadow:'lg'
-        }}>
+        _hover={{
+          cursor: "pointer",
+          shadow: "lg",
+        }}
+      >
         <CardBody>
           <Text fontWeight={"400"}> {props.title} Title</Text>
           <Text fontWeight={"400"} fontSize={"14px"} color={"gray.500"}>
@@ -40,7 +39,8 @@ const Cards = (props) => {
                 bg={"white"}
                 color={"black"}
                 label="Admin"
-                aria-label="A tooltip">
+                aria-label="A tooltip"
+              >
                 <Text me={2}>
                   <BiUser />
                 </Text>
