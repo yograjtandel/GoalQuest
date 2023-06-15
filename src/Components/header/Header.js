@@ -48,7 +48,7 @@ const header = (props) => {
           </Box>
         </Box>
       </Box>
-      <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+      <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} maintitle="New Task">
         <NewTask/>
       </Drawer>
     </>

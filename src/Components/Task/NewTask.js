@@ -185,9 +185,9 @@ const NewTask = () => {
         </Accordion>
       </Box>
       <Box>
-        <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} size={"md"}>
-          {!isLogtime && <ParentChildTask />}
-          {isLogtime && <Logtime />}
+        <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} size={"md"} maintitle="Parent Task ">
+          {!isLogtime && <ParentChildTask  />}
+          {isLogtime && <Logtime  />}
         </Drawer>
       </Box>
     </>

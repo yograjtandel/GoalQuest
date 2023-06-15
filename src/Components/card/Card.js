@@ -50,7 +50,7 @@ const Cards = (props) => {
           </Flex>
         </CardBody>
       </Card>
-      <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+      <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} maintitle="Task">
         <NewTask />
       </Drawer>
     </>

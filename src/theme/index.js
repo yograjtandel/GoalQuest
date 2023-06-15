@@ -14,6 +14,7 @@ const Theme = extendTheme({
         fontcolor: {
             400: "#5a6065",
         }
+   
     },
     fonts: {
         heading: `'Open Sans', sans-serif`,
