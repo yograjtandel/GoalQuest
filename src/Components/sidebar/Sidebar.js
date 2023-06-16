@@ -12,8 +12,8 @@ import {
 const LinkItems = [
   { icon: <BiHome /> },
   { icon: <BiEdit /> },
-  { icon: <BiMessageAltDetail /> },
-  { icon: <BiReceipt /> },
+  // { icon: <BiMessageAltDetail /> },
+  // { icon: <BiReceipt /> },
   { icon: <BiCog /> },
 ];
 const sidebar = () => {
@@ -23,16 +23,14 @@ const sidebar = () => {
       w={"100%"}
       m={0}
       flexDirection="column"
-      boxShadow="xs"
-      rounded="md"
-      bg="white">
+      boxShadow='xl' p='2' rounded='md' bg='white'>
       <Box
         w={"100%"}
         display={"flex"}
         alignItems="start"
         justifyContent="center"
         p={0}
-        pt={2}>
+        >
         <Image src={logo.src} w={"auto"} h={"40px"} alt="logo" />
       </Box>
       <Flex
@@ -55,7 +53,6 @@ const sidebar = () => {
           ))}
         </List>
       </Flex>
-      {/* <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} /> */}
     </Flex>
   );
 };

@@ -12,8 +12,7 @@ const login = () => {
         alignItems={"center"}
         height={'100%'}
         minH={'100vh'}
-        overflow={"hidden"}
-      >
+        overflow={"hidden"}>
         <Card p={4} w={'50%'} boxShadow='lg' rounded='md' bg='white'>
           <CardBody>
            <Heading as='h4' size='md'textAlign={'center'}>Welcome Back !</Heading>
@@ -22,8 +21,7 @@ const login = () => {
            </InputWrapper>
            <InputWrapper  title="Password">
             <Input type="password" placeholder="*******"></Input>
-           </InputWrapper>
-           
+           </InputWrapper> 
            <Flex w={'100%'} mt={'4'} flexDirection={'column'}>
           <Box> <Link href={'#'}>Forgot Password?</Link></Box>
            <Button mt={4} w={'100%'} colorScheme='blue'>Login</Button>
