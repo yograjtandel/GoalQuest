@@ -1,0 +1,32 @@
+html,
+body {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#__next {
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.123);
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.137);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.123);
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.137);
+}
+
+
+.primary-color {
+  color: #1a86ae;
+}

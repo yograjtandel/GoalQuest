@@ -22,12 +22,11 @@ function CustomDrawer(props) {
         placement="right"
         onClose={props.onClose}
         finalFocusRef={props.btnRef}
-        size={"lg"}
-      >
+         size={props.size || "lg"}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>  
+          <DrawerHeader>{props.maintitle}</DrawerHeader>  
           <DrawerBody>{props.children}</DrawerBody>
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={props.onClose}>

@@ -1,6 +1,5 @@
 import {
   Box,
-  Flex,
   Heading,
   Menu,
   MenuButton,
@@ -8,19 +7,15 @@ import {
   MenuItem,
   Button,
   useDisclosure,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
+
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import Drawer from "../drawer/drawer";
+import Drawer from "../drawer/Drawer";
+import NewTask from "../Task/NewTask";
 import { useRef, useState } from "react";
 import { BiPlus } from "react-icons/bi";
-import InputWrapper from "../form/inputWrapper";
+import ParentChildTask from "../Task/ParentChildTask";
 
-const header = () => {
+const header = (props) => {
   //   const [newTicket, setNewTicket] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
@@ -33,12 +28,11 @@ const header = () => {
         bg="white"
         display={"Flex"}
         justifyContent={"space-between"}
-        alignItems={"center"}
-      >
-        <Heading fontSize={"1.4rem"}>All Tickets</Heading>
+        alignItems={"center"}>
+        <Heading fontSize={"1.4rem"}>{props.title}</Heading>
         <Box display={"flex"}>
-          <Button size={"md"} ref={btnRef} colorScheme="teal" onClick={onOpen}>
-            New <BiPlus />
+          <Button size={"md"} ref={btnRef} colorScheme="teal" onClick={onOpen} variant='outline'lineHeight={0}>
+            New <BiPlus m={0} p={0} />
           </Button>
           <Box ms={"3"}>
             <Menu ps={2}>
@@ -54,11 +48,8 @@ const header = () => {
           </Box>
         </Box>
       </Box>
-      <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-       <InputWrapper title="hello">
-       <Input type='email' />
-        </InputWrapper>
-
+      <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} maintitle="New Task">
+        <NewTask/>
       </Drawer>
     </>
   );
