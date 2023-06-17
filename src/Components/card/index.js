@@ -6,13 +6,12 @@ import {
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
-import Drawer from "../drawer/Drawer";
+import CustomDrawer from "../drawer";
 import { BiStar, BiUser, BiCircle } from "react-icons/bi";
-import NewTask from "../Task/NewTask";
-import { useRef, useState } from "react";
-const Cards = (props) => {
+import NewTask from "../task/NewTask";
+
+const CustomCard = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
 
   return (
     <>
@@ -28,10 +27,11 @@ const Cards = (props) => {
         }}
       >
         <CardBody>
-          <Text fontWeight={"400"}> {props.title} Title</Text>
+          <Text fontWeight={"400"}> {props.title}</Text>
           <Text fontWeight={"400"} fontSize={"14px"} color={"gray.500"}>
-            {props.name}Name
+            {props.name}
           </Text>
+          {props.children}
           <Flex mt={2} justifyContent={"space-between"}>
             <BiStar />
             <Flex>
@@ -50,10 +50,15 @@ const Cards = (props) => {
           </Flex>
         </CardBody>
       </Card>
-      <Drawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} maintitle="Task">
-        <NewTask />
-      </Drawer>
+      <CustomDrawer
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        maintitle="Task"
+      >
+        {props.onClickDispaly}
+      </CustomDrawer>
     </>
   );
 };
-export default Cards;
+export default CustomCard;

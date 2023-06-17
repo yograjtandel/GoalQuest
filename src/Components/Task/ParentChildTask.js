@@ -1,5 +1,5 @@
 import { Input , Select , Textarea } from "@chakra-ui/react";
-import InputWrapper from "../form/InputWrapper";
+import { InputWrapper } from "../form";
 const ParentChildTask = () => {
   return (
     <>

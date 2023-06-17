@@ -20,31 +20,26 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import Drawer from "../drawer/Drawer";
+import CustomDrawer from "../drawer";
 import { useRef, useState } from "react";
-import InputWrapper from "../form/InputWrapper";
-import Logtime from "./LogTime";
-import ParentChildTask from "./ParentChildTask";
-import Cards from "../card/Card";
-// import { AddIcon } from "@chakra-ui/icons";
+import { InputWrapper } from "../form";
+import { LogTime, ParentChildTask } from "./index";
+import CustomCard from "../card";
 import { AddIcon } from "@chakra-ui/icons";
 const NewTask = () => {
   const [maintitle, setTitle] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLogtime, setIsLogtime] = useState(false);
 
-  console.log(isLogtime);
-  const btnRef = useRef();
-
   const parentTaskHandler = () => {
     setIsLogtime(false);
-    setTitle("Parent Task");
+    setTitle("Parent");
     onOpen();
   };
 
   const childTaskHandler = () => {
     setIsLogtime(false);
-    setTitle("Child Task");
+    setTitle("Child");
     onOpen();
   };
 
@@ -99,7 +94,8 @@ const NewTask = () => {
                 px={"4"}
                 bg={"none"}
                 borderBottom={"1px solid"}
-                borderColor={"gray.300"}>
+                borderColor={"gray.300"}
+              >
                 <Box as="span" flex="1" textAlign="left">
                   Parent Task
                 </Box>
@@ -110,17 +106,17 @@ const NewTask = () => {
               <Box w={"100%"} display={"flex"} justifyContent={"end"} mb={2}>
                 <Button
                   size={"sm"}
-                  ref={btnRef}
                   onClick={parentTaskHandler}
                   bg={"secondary.400"}
                   color={"white"}
-                  _hover={{ bg: "primary.400" }}>
+                  _hover={{ bg: "primary.400" }}
+                >
                   <AddIcon />
                 </Button>
               </Box>
               <Flex justifyContent={"space-between"} flexWrap={"wrap"}>
-                <Cards />
-                <Cards />
+                <CustomCard />
+                <CustomCard />
               </Flex>
             </AccordionPanel>
           </AccordionItem>
@@ -128,24 +124,24 @@ const NewTask = () => {
             <h2>
               <AccordionButton
                 px={"4"}
-                ref={btnRef}
                 bg={"none"}
                 onClick={childTaskHandler}
                 borderBottom={"1px solid"}
-                borderColor={"gray.300"}>
+                borderColor={"gray.300"}
+              >
                 <Box as="span" flex="1" textAlign="left">
                   Child Task
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-            {/* <AccordionPanel pb={4}></AccordionPanel> */}
           </AccordionItem>
           <AccordionItem>
             <h2>
               <AccordionButton
                 borderBottom={"1px solid"}
-                borderColor={"gray.300"}>
+                borderColor={"gray.300"}
+              >
                 <Box as="span" flex="1" textAlign="left">
                   Time Logs
                 </Box>
@@ -193,15 +189,16 @@ const NewTask = () => {
         </Accordion>
       </Box>
       <Box>
-        <Drawer
+        <CustomDrawer
           isOpen={isOpen}
           onOpen={onOpen}
           onClose={onClose}
           size={"md"}
-          maintitle={maintitle}>
+          maintitle={`${maintitle} Title`}
+        >
           {!isLogtime && <ParentChildTask />}
-          {isLogtime && <Logtime />}
-        </Drawer>
+          {isLogtime && <LogTime />}
+        </CustomDrawer>
       </Box>
     </>
   );

@@ -1,6 +1,6 @@
 import { Checkbox, Input, Select, Textarea } from "@chakra-ui/react";
-import InputWrapper from "../form/InputWrapper";
-const logtime = () => {
+import { InputWrapper } from "../form";
+const LogTime = () => {
   return (
     <>
       <InputWrapper title="Emp">
@@ -25,4 +25,4 @@ const logtime = () => {
     </>
   );
 };
-export default logtime;
+export default LogTime;

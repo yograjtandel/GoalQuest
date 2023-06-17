@@ -1,4 +1,4 @@
-import InputWrapper from "@/src/Components/form/InputWrapper";
+import { InputWrapper } from "@/src/components/form";
 import { Box, Button, Card, CardBody, Container, Flex, Heading, Input, Text } from "@chakra-ui/react";
 import Link from "next/link";
 

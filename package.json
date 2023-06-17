@@ -13,7 +13,9 @@
     "@chakra-ui/react": "^2.7.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@reduxjs/toolkit": "^1.9.5",
     "@svgr/webpack": "^8.0.1",
+    "axios": "^1.4.0",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "framer-motion": "^10.12.16",
@@ -21,6 +23,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.9.0",
+    "react-redux": "^8.1.0",
     "uuid": "^9.0.0"
   }
 }

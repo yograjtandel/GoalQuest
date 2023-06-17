@@ -13,8 +13,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-function CustomDrawer(props) {
-
+const CustomDrawer = (props) => {
   return (
     <>
       <Drawer
@@ -22,11 +21,12 @@ function CustomDrawer(props) {
         placement="right"
         onClose={props.onClose}
         finalFocusRef={props.btnRef}
-         size={props.size || "lg"}>
+        size={props.size || "lg"}
+      >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>{props.maintitle}</DrawerHeader>  
+          <DrawerHeader>{props.maintitle}</DrawerHeader>
           <DrawerBody>{props.children}</DrawerBody>
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={props.onClose}>
@@ -38,5 +38,5 @@ function CustomDrawer(props) {
       </Drawer>
     </>
   );
-}
+};
 export default CustomDrawer;
