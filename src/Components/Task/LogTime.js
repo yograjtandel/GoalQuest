@@ -1,5 +1,5 @@
-import { Checkbox, Input, Select, Textarea } from "@chakra-ui/react";
-import { InputWrapper } from "../form";
+import { Checkbox, Input, Select, Textarea } from '@chakra-ui/react';
+import { InputWrapper } from '../form';
 const LogTime = () => {
   return (
     <>

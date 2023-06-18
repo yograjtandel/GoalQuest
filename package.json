@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier-format-inplace": "npx prettier --write ."
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
@@ -16,7 +17,6 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@svgr/webpack": "^8.0.1",
     "axios": "^1.4.0",
-    "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "framer-motion": "^10.12.16",
     "next": "13.4.4",
@@ -25,5 +25,16 @@
     "react-icons": "^4.9.0",
     "react-redux": "^8.1.0",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.8.8"
   }
 }

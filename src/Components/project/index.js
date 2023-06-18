@@ -1,1 +1,1 @@
-export { default as NewProject } from "./NewProject";
+export { default as NewProject } from './NewProject';

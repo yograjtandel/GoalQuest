@@ -19,13 +19,13 @@ import {
   Th,
   Td,
   TableContainer,
-} from "@chakra-ui/react";
-import CustomDrawer from "../drawer";
-import { useRef, useState } from "react";
-import { InputWrapper } from "../form";
-import { LogTime, ParentChildTask } from "./index";
-import CustomCard from "../card";
-import { AddIcon } from "@chakra-ui/icons";
+} from '@chakra-ui/react';
+import CustomDrawer from '../drawer';
+import { useRef, useState } from 'react';
+import { InputWrapper } from '../form';
+import { LogTime, ParentChildTask } from './index';
+import CustomCard from '../card';
+import { AddIcon } from '@chakra-ui/icons';
 const NewTask = () => {
   const [maintitle, setTitle] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,13 +33,13 @@ const NewTask = () => {
 
   const parentTaskHandler = () => {
     setIsLogtime(false);
-    setTitle("Parent");
+    setTitle('Parent');
     onOpen();
   };
 
   const childTaskHandler = () => {
     setIsLogtime(false);
-    setTitle("Child");
+    setTitle('Child');
     onOpen();
   };
 
@@ -87,14 +87,14 @@ const NewTask = () => {
         </Select>
       </InputWrapper>
       <Box>
-        <Accordion shadow={"xl"} allowToggle={"true"} mt={2}>
+        <Accordion shadow={'xl'} allowToggle={'true'} mt={2}>
           <AccordionItem>
             <h2>
               <AccordionButton
-                px={"4"}
-                bg={"none"}
-                borderBottom={"1px solid"}
-                borderColor={"gray.300"}
+                px={'4'}
+                bg={'none'}
+                borderBottom={'1px solid'}
+                borderColor={'gray.300'}
               >
                 <Box as="span" flex="1" textAlign="left">
                   Parent Task
@@ -103,18 +103,18 @@ const NewTask = () => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Box w={"100%"} display={"flex"} justifyContent={"end"} mb={2}>
+              <Box w={'100%'} display={'flex'} justifyContent={'end'} mb={2}>
                 <Button
-                  size={"sm"}
+                  size={'sm'}
                   onClick={parentTaskHandler}
-                  bg={"secondary.400"}
-                  color={"white"}
-                  _hover={{ bg: "primary.400" }}
+                  bg={'secondary.400'}
+                  color={'white'}
+                  _hover={{ bg: 'primary.400' }}
                 >
                   <AddIcon />
                 </Button>
               </Box>
-              <Flex justifyContent={"space-between"} flexWrap={"wrap"}>
+              <Flex justifyContent={'space-between'} flexWrap={'wrap'}>
                 <CustomCard />
                 <CustomCard />
               </Flex>
@@ -123,11 +123,11 @@ const NewTask = () => {
           <AccordionItem>
             <h2>
               <AccordionButton
-                px={"4"}
-                bg={"none"}
+                px={'4'}
+                bg={'none'}
                 onClick={childTaskHandler}
-                borderBottom={"1px solid"}
-                borderColor={"gray.300"}
+                borderBottom={'1px solid'}
+                borderColor={'gray.300'}
               >
                 <Box as="span" flex="1" textAlign="left">
                   Child Task
@@ -138,10 +138,7 @@ const NewTask = () => {
           </AccordionItem>
           <AccordionItem>
             <h2>
-              <AccordionButton
-                borderBottom={"1px solid"}
-                borderColor={"gray.300"}
-              >
+              <AccordionButton borderBottom={'1px solid'} borderColor={'gray.300'}>
                 <Box as="span" flex="1" textAlign="left">
                   Time Logs
                 </Box>
@@ -149,15 +146,15 @@ const NewTask = () => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Text mb={2} mt={2} fontWeight={"bold"}>
+              <Text mb={2} mt={2} fontWeight={'bold'}>
                 Total Time Tracked
               </Text>
               <Text mb={4}>02 hours 2 mins 5 sec</Text>
-              <Button onClick={logtimeHandler} size={"sm"} mb={4}>
+              <Button onClick={logtimeHandler} size={'sm'} mb={4}>
                 Logtime
               </Button>
-              <TableContainer border={"1px solid"} borderColor={"gray.200"}>
-                <Table variant="simple" size={"sm"}>
+              <TableContainer border={'1px solid'} borderColor={'gray.200'}>
+                <Table variant="simple" size={'sm'}>
                   <Thead>
                     <Tr>
                       <Th>Emp</Th>
@@ -193,7 +190,7 @@ const NewTask = () => {
           isOpen={isOpen}
           onOpen={onOpen}
           onClose={onClose}
-          size={"md"}
+          size={'md'}
           maintitle={`${maintitle} Title`}
         >
           {!isLogtime && <ParentChildTask />}

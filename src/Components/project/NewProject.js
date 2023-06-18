@@ -1,8 +1,8 @@
-const { Input, Select, Textarea } = require("@chakra-ui/react");
-const { default: InputWrapper } = require("../form/InputWrapper");
+const { Input, Select, Textarea } = require('@chakra-ui/react');
+const { default: InputWrapper } = require('../form/InputWrapper');
 
 const NewProject = () => {
-    debugger
+  debugger;
   return (
     <>
       <InputWrapper title="Title">

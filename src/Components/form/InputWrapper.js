@@ -1,4 +1,4 @@
-import { FormControl, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormLabel } from '@chakra-ui/react';
 
 const InputWrapper = (props) => {
   return (

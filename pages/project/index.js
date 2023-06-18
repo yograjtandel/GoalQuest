@@ -1,4 +1,4 @@
-const { Text } = require("@chakra-ui/react");
+const { Text } = require('@chakra-ui/react');
 
 const Project = () => {
   return (

@@ -1,31 +1,24 @@
-import {
-  Box,
-  Accordion,
-  Input,
-  Button,
-  Checkbox,
-  Select,
-} from "@chakra-ui/react";
+import { Box, Accordion, Input, Button, Checkbox, Select } from '@chakra-ui/react';
 
-import AccordionItem from "@/src/components/ui/AccordianItem";
+import AccordionItem from '@/src/components/ui/AccordianItem';
 
-import { InputWrapper } from "@/src/components/form";
+import { InputWrapper } from '@/src/components/form';
 
 const setting = () => {
   return (
-    <Box p={4} w={"100%"} display={"flex"} justifyContent={"start"}>
-      <Accordion w={"70%"} allowToggle={"true"}>
+    <Box p={4} w={'100%'} display={'flex'} justifyContent={'start'}>
+      <Accordion w={'70%'} allowToggle={'true'}>
         {/* accordion 1 */}
         <AccordionItem title="Stage">
           <InputWrapper title="Name">
             <Input type="text" />
           </InputWrapper>
           <Button
-            color={"white"}
-            bg={"secondary.400"}
-            size={"sm"}
+            color={'white'}
+            bg={'secondary.400'}
+            size={'sm'}
             _hover={{
-              bg: "primary.400",
+              bg: 'primary.400',
             }}
           >
             Save
@@ -37,11 +30,11 @@ const setting = () => {
             <Input type="text" />
           </InputWrapper>
           <Button
-            color={"white"}
-            bg={"secondary.400"}
-            size={"sm"}
+            color={'white'}
+            bg={'secondary.400'}
+            size={'sm'}
             _hover={{
-              bg: "primary.400",
+              bg: 'primary.400',
             }}
           >
             Save
@@ -53,24 +46,24 @@ const setting = () => {
             <Input type="text" />
           </InputWrapper>
           <InputWrapper title="Permission">
-            <Box display={"flex"} flexDirection={"column"} w={"50%"}>
-              <Checkbox w={"fit-content"} defaultChecked fontWeight={"normal"}>
+            <Box display={'flex'} flexDirection={'column'} w={'50%'}>
+              <Checkbox w={'fit-content'} defaultChecked fontWeight={'normal'}>
                 Create
               </Checkbox>
-              <Checkbox w={"fit-content"} defaultChecked fontWeight={"normal"}>
+              <Checkbox w={'fit-content'} defaultChecked fontWeight={'normal'}>
                 Update
               </Checkbox>
-              <Checkbox w={"fit-content"} defaultChecked fontWeight={"normal"}>
+              <Checkbox w={'fit-content'} defaultChecked fontWeight={'normal'}>
                 Delete
               </Checkbox>
             </Box>
           </InputWrapper>
           <Button
-            color={"white"}
-            bg={"secondary.400"}
-            size={"sm"}
+            color={'white'}
+            bg={'secondary.400'}
+            size={'sm'}
             _hover={{
-              bg: "primary.400",
+              bg: 'primary.400',
             }}
           >
             Save
@@ -92,11 +85,11 @@ const setting = () => {
             <Input type="text" />
           </InputWrapper>
           <Button
-            color={"white"}
-            bg={"secondary.400"}
-            size={"sm"}
+            color={'white'}
+            bg={'secondary.400'}
+            size={'sm'}
             _hover={{
-              bg: "primary.400",
+              bg: 'primary.400',
             }}
           >
             Save

@@ -1,5 +1,5 @@
-import React from "react";
-import { BiPlus } from "react-icons/bi";
+import React from 'react';
+import { BiPlus } from 'react-icons/bi';
 import {
   Drawer,
   DrawerBody,
@@ -11,7 +11,7 @@ import {
   useDisclosure,
   Button,
   Input,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const CustomDrawer = (props) => {
   return (
@@ -21,7 +21,7 @@ const CustomDrawer = (props) => {
         placement="right"
         onClose={props.onClose}
         finalFocusRef={props.btnRef}
-        size={props.size || "lg"}
+        size={props.size || 'lg'}
       >
         <DrawerOverlay />
         <DrawerContent>
