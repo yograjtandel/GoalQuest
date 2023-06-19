@@ -1,24 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { updateTicketForm } from "./ticket.reducers";
+import { createSlice } from '@reduxjs/toolkit';
+import { updateTicketForm } from './ticket.reducers';
 
 const initialState = {
   tickets: [],
   ticket: {
-    title: "",
-    project_id: "",
+    title: '',
+    project_id: '',
     deadline: new Date(),
-    description: "",
-    priority: "",
-    createdBy: "",
-    asignee: "",
-    parent_task: "",
+    description: '',
+    priority: '',
+    createdBy: '',
+    asignee: '',
+    parent_task: '',
     child_task: [],
-    stage: "",
-    tag: "",
+    stage: '',
+    tag: '',
   },
 };
 const ticketSlice = createSlice({
-  name: "ticket",
+  name: 'ticket',
   initialState,
   reducers: {
     updateTicketForm,

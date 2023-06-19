@@ -7,16 +7,16 @@ import {
   MenuItem,
   Button,
   useDisclosure,
-} from "@chakra-ui/react";
-import CustomDrawer from "../drawer";
-import { NewTask } from "../task";
-import { useRef, useState } from "react";
-import { AddIcon } from "@chakra-ui/icons";
-import { NewProject } from "../project";
+} from '@chakra-ui/react';
+import CustomDrawer from '../drawer';
+import { NewTask } from '../task';
+import { useRef, useState } from 'react';
+import { AddIcon } from '@chakra-ui/icons';
+import { NewProject } from '../project';
 
 const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
 
   const onMenuClickHAndler = (e) => {
     debugger;
@@ -30,25 +30,25 @@ const Header = (props) => {
         p="6"
         py={2}
         bg="white"
-        display={"Flex"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
+        display={'Flex'}
+        justifyContent={'space-between'}
+        alignItems={'center'}
       >
-        <Heading fontSize={"1.4rem"}>{props.title}</Heading>
-        <Box display={"flex"}>
+        <Heading fontSize={'1.4rem'}>{props.title}</Heading>
+        <Box display={'flex'}>
           <Menu>
             <MenuButton
               as={Button}
-              size={"md"}
+              size={'md'}
               colorScheme="teal"
               variant="outline"
               lineHeight={0}
             >
               New
               <AddIcon
-                size={"14px"}
+                size={'14px'}
                 ml={2}
-                _hover={{ color: "blue.300", cursor: "pointer" }}
+                _hover={{ color: 'blue.300', cursor: 'pointer' }}
               />
             </MenuButton>
             <MenuList>
@@ -60,9 +60,9 @@ const Header = (props) => {
               </MenuItem>
             </MenuList>
           </Menu>
-          <Box ms={"3"}>
+          <Box ms={'3'}>
             <Menu ps={2}>
-              <MenuButton borderRadius={"50%"} p={2} as={Button}></MenuButton>
+              <MenuButton borderRadius={'50%'} p={2} as={Button}></MenuButton>
               <MenuList>
                 <MenuItem>Profile</MenuItem>
                 <MenuItem>Create a Copy</MenuItem>
@@ -80,8 +80,8 @@ const Header = (props) => {
         onClose={onClose}
         maintitle={`New ${title}`}
       >
-        {title === "ticket" && <NewTask />}
-        {title === "project" && <NewProject />}
+        {title === 'ticket' && <NewTask />}
+        {title === 'project' && <NewProject />}
       </CustomDrawer>
     </>
   );
