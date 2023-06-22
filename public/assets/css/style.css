@@ -9,7 +9,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.123);
 }
@@ -17,14 +17,15 @@ body {
   background-color: rgba(0, 0, 0, 0.137);
 }
 
-::-webkit-scrollbar {
-  width: 4px;
+/* ::-webkit-scrollbar {
+  width: 8px;
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.123);
 }
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.137);
-}
+} */
+
 
 .primary-color {
   color: #1a86ae;
