@@ -33,6 +33,7 @@ const Header = (props) => {
         display={'Flex'}
         justifyContent={'space-between'}
         alignItems={'center'}
+        overflow={'hidden'}
       >
         <Heading fontSize={'1.4rem'}>{props.title}</Heading>
         <Box display={'flex'}>
