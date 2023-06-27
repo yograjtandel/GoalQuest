@@ -1,8 +1,16 @@
-import { Box, Accordion, Input, Button, Checkbox, Select } from '@chakra-ui/react';
+import {
+  Box,
+  Accordion,
+  Input,
+  Button,
+  Checkbox,
+  Select,
+} from '@chakra-ui/react';
 
 import AccordionItem from '@/src/components/ui/AccordianItem';
-
 import { InputWrapper } from '@/src/components/form';
+
+import Action from '@/src/helper/action';
 
 const setting = () => {
   return (
@@ -101,3 +109,12 @@ const setting = () => {
 };
 
 export default setting;
+
+export const getServerSideProps = async () => {
+  const res = await Action({
+    method: 'get',
+    url: '/v1/rights/',
+  });
+
+  return { props: {} };
+};
