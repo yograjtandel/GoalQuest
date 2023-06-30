@@ -1,4 +1,6 @@
 import { AddIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { v4 as uuidv4 } from "uuid";
+import NextLink from "next/link";
 import {
   Box,
   Flex,
@@ -14,7 +16,13 @@ import {
 } from '@chakra-ui/react';
 import logo from '@/public/assets/images/logo.png';
 
-const Links = ['Home','About Us', 'Team', 'Contact Us'];
+const Links = [
+  { title: 'Home', href:"/web/landingpage" },
+  { title: 'About Us', href:"/web/aboutus" },
+  { title: 'Team', href:"/web/team" },
+  { title: 'Contact Us', href:"/web/contactus" },
+ 
+];
 const webheader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -53,15 +61,9 @@ const webheader = () => {
               justifyContent={'center'}
             >
               {Links.map((link) => (
-                <Link
-                  key={link}
-                  fontWeight={'600'}
-                  _hover={{
-                    color: 'primary.400',
-                  }}
-                >
-                  {link}
-                </Link>
+                 <Link as={NextLink} key={uuidv4()} href={link.href}>
+                 {link.title}
+               </Link>
               ))}
             </HStack>
             <Flex

@@ -5,7 +5,6 @@ import {
   Container,
   Flex,
   FormControl,
-  FormHelperText,
   FormLabel,
   Heading,
   Input,
@@ -27,8 +26,7 @@ const contactus = () => {
               display={'flex'}
               flexDirection={'column'}
               alignItems={'center'}
-              mb={4}
-            >
+              mb={4}>
               <Heading mb={2}>Get in Touch</Heading>
               <Text>24/7 We will Answer your Questions and Problems</Text>
             </Box>
@@ -36,8 +34,7 @@ const contactus = () => {
               <Flex color="white">
                 <Box
                   w={{ base: '100%', sm: '100%', md: '30%', lg: '30%' }}
-                  p={4}
-                >
+                  p={4}>
                   <Box boxShadow="md" rounded="md" bg="white" p={4} mb={4}>
                     <Box>
                       <Heading color={'primary.400'} size="md" mb={2}>
@@ -49,8 +46,7 @@ const contactus = () => {
                       <Link
                         href='mailto:"info@goalquest.in"'
                         color={'secondary.400'}
-                        _hover={{ color: 'primary.400' }}
-                      >
+                        _hover={{ color: 'primary.400' }}>
                         info@goalquest.in
                       </Link>
                     </Box>
