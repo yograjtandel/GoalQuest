@@ -29,11 +29,12 @@ const dashboard = (props) => {
             {tasktitle.map((tasktitle) => (
               <Box w={'100%'} minWidth={'16%'} p={2}>
                 <Card p={0} footer={false} openDrawer={false}>
-                  <CardBody>
+                  <CardBody p={0}>
                     <Text
                       fontSize={16}
                       fontWeight={'normal'}
-                      color={'primary.400'}>
+                      color={'primary.400'}
+                    >
                       {tasktitle.title}
                     </Text>
                     <Text fontWeight={'bold'}>{tasktitle.taskstatus}</Text>
@@ -51,9 +52,11 @@ const dashboard = (props) => {
             display={'flex'}
             flexWrap={'wrap'}
             w={'100%'}>
-            <Box w="65%" p={2}><Box w={'100%'} h={'100%'} bg={'white'}>
-           <Text> hello</Text>
-              </Box></Box>
+            <Box w="65%" p={2}>
+              <Box w={'100%'} h={'100%'} bg={'white'}>
+                <Text> hello</Text>
+              </Box>
+            </Box>
             <Box w="35%" display={'flex'} flexWrap={'wrap'} overflow={'hidden'}>
               {complitiontask.map((complitiontask) => (
                 <Box w={'50%'} p={2}>

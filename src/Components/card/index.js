@@ -12,12 +12,13 @@ import NewTask from '../task/NewTask';
 
 const CustomCard = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       <Card
         w={'100%'}
+        h={'100%'}
         mb={4}
+        bg={ undefined || props.bg}
         onClick={
           props.openDrawer === undefined || props.openDrawer !== false
             ? () => {

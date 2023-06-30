@@ -1,8 +1,6 @@
 import {
   Box,
   Flex,
-  Grid,
-  GridItem,
   Button,
   Menu,
   MenuButton,
@@ -11,8 +9,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { AddIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import CustomCard from '@/src/components/card';
-import { NewTask } from '@/src/components/task';
+import Card from '@/src/Components/card/index';
+// import { NewTask } from '@/src/components/task';
 const Ticket = () => {
   return (
     <Box p={2} overflow={'hidden'}>
