@@ -1,3 +1,4 @@
+import Action from '@/src/helper/action';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
 export default function Home() {
@@ -19,8 +20,20 @@ async function signup() {
       }),
     }
   )
-  debugger
   const body = await auth0Response.json()
+  debugger
+
+  const res = await Action({
+    method: 'post',
+    url: '/v1/users/',
+    data: {
+        email:"new@new.com",
+        role: "6497ca904ff8285535f7711c",
+        name:"new"
+    }
+  });
+  debugger
+
   
 }
   const { data: session } = useSession();

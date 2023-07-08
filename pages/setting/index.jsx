@@ -116,5 +116,5 @@ export const getServerSideProps = async () => {
     url: '/v1/rights/',
   });
 
-  return { props: {rights: res.data} };
+  return { props: {} };
 };
