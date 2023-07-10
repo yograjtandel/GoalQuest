@@ -17,7 +17,6 @@ import { NewProject } from '../project';
 const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState('');
-
   const onMenuClickHAndler = (e) => {
     debugger;
     setTitle(e.target.name);

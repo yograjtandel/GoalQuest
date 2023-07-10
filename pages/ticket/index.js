@@ -18,23 +18,20 @@ const Ticket = () => {
         gap={4}
         overflowX={'scroll'}
         display={'flex'}
-        h={'calc(100vh - 70px)'}
-      >
+        h={'calc(100vh - 70px)'}>
         <Box w={'300px'} minWidth={'300px'}>
           <Box
             display={'flex'}
             justifyContent={'center'}
             flexDirection={'column'}
             alignItems={'center'}
-            p={3}
-          >
+            p={3}>
             <Flex
               alignItems={'center'}
               justifyContent={'space-between'}
               w={'100%'}
               px={4}
-              pb={4}
-            >
+              pb={4}>
               <Text>To Do </Text>
               <Menu>
                 <MenuButton as={Button} bg={'none'}>

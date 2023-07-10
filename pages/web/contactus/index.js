@@ -17,10 +17,10 @@ import { color } from 'framer-motion';
 const contactus = () => {
   return (
     <>
-      <Box overflow={'hidden'}>
+      <Box overflow={'hidden'} bg={'white'}>
         <Header />
         <Box>
-          <Container maxW={'container.xl'} py={10}>
+          <Container maxW={'container.xl'} py={10}  border={'1px solid red'}>
             <Box
               w="100"
               display={'flex'}
@@ -35,7 +35,7 @@ const contactus = () => {
                 <Box
                   w={{ base: '100%', sm: '100%', md: '30%', lg: '30%' }}
                   p={4}>
-                  <Box boxShadow="md" rounded="md" bg="white" p={4} mb={4}>
+                  <Box boxShadow="lg" rounded="md" bg="gray.100" p={4} mb={4}>
                     <Box>
                       <Heading color={'primary.400'} size="md" mb={2}>
                         Chat to Us
@@ -51,11 +51,11 @@ const contactus = () => {
                       </Link>
                     </Box>
                   </Box>
-                  <Box boxShadow="md" rounded="md" bg="white" p={4}>
+                  <Box boxShadow="lg" rounded="md" bg="gray.100" p={4}>
                     <Box>
                       <Heading color={'primary.400'} size="md" mb={2}>
                         Call to Us
-                      </Heading>
+                      </Heading>  
                       <Text color={'secondary.400'} mb={2} fontSize={'14px'}>
                         Monday to Friday from 9am to 5pm
                       </Text>
@@ -73,9 +73,9 @@ const contactus = () => {
                     p={4}
                     w={'100%'}
                     display={'flex'}
-                    boxShadow="md"
-                    rounded="md"
-                    bg="white"
+                    boxShadow="lg"
+                    rounded="lg"
+                    bg="gray.100"
                     flexWrap={'wrap'}
                   >
                     <Box w={'sm'} p={2}>
@@ -115,7 +115,10 @@ const contactus = () => {
                       </FormControl>
                     </Box>
                     <Box w={'100%'}>
-                      <Button>Submit</Button>{' '}
+                      <Button bg={'white'} _hover={{
+                        bg:'primary.400',
+                        color:'white',
+                      }}>Submit</Button>{' '}
                     </Box>
                   </Box>
                 </Box>

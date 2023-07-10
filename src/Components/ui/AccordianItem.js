@@ -1,7 +1,6 @@
 import {
   Box,
-  Accordion,
-  AccordionItem,
+  
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
@@ -9,6 +8,7 @@ import {
   Button,
   Checkbox,
   Select,
+  AccordionItem,
 } from '@chakra-ui/react';
 
 const CustomAccordinaItem = (props) => {

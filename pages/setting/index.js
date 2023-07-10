@@ -1,15 +1,32 @@
-import { Box, Accordion, Input, Button, Checkbox, Select } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  useDisclosure,
 
-import AccordionItem from '@/src/components/ui/AccordianItem';
+} from '@chakra-ui/react';
 
-import { InputWrapper } from '@/src/components/form';
+import Customtab from '@/src/Components/tabpanel';
+import { ChevronDownIcon } from '@chakra-ui/icons';
+import CustomDrawer from '@/src/Components/drawer';
 
-const setting = () => {
+
+const setting = (props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box p={4} w={'100%'} display={'flex'} justifyContent={'start'}>
-      <Accordion w={'70%'} allowToggle={'true'}>
-        {/* accordion 1 */}
-        <AccordionItem title="Stage">
+    <Box
+      p={4}
+      w={'100%'}
+      display={'flex'}
+      justifyContent={'start'}
+      flexWrap={'wrap'}
+    >
+      {/* <Accordion w={'70%'} allowToggle={'true'}> */}
+      {/* accordion 1 */}
+      {/* <AccordionItem title="Stage">
           <InputWrapper title="Name">
             <Input type="text" />
           </InputWrapper>
@@ -23,9 +40,9 @@ const setting = () => {
           >
             Save
           </Button>
-        </AccordionItem>
-        {/* accordion 2 */}
-        <AccordionItem title="Tag">
+        </AccordionItem> */}
+      {/* accordion 2 */}
+      {/* <AccordionItem title="Tag">
           <InputWrapper title="Name">
             <Input type="text" />
           </InputWrapper>
@@ -39,9 +56,9 @@ const setting = () => {
           >
             Save
           </Button>
-        </AccordionItem>
-        {/* accordion 3 */}
-        <AccordionItem title="Role">
+        </AccordionItem> */}
+      {/* accordion 3 */}
+      {/* <AccordionItem title="Role">
           <InputWrapper title="Name">
             <Input type="text" />
           </InputWrapper>
@@ -68,9 +85,9 @@ const setting = () => {
           >
             Save
           </Button>
-        </AccordionItem>
-        {/* Accordion 4 */}
-        <AccordionItem title="User">
+        </AccordionItem> */}
+      {/* Accordion 4 */}
+      {/* <AccordionItem title="User">
           <InputWrapper title="Role">
             <Select placeholder="Select option">
               <option value="option1">Option 1</option>
@@ -94,8 +111,77 @@ const setting = () => {
           >
             Save
           </Button>
-        </AccordionItem>
-      </Accordion>
+        </AccordionItem> */}
+      {/* </Accordion> */}
+      <Box w={'100%'} display={'flex'} justifyContent={'end'}>
+        <Menu>
+          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            Actions
+          </MenuButton>
+          <MenuList>
+            <MenuItem
+              onClick={
+                props.openDrawer === undefined || props.openDrawer !== false
+                  ? () => {
+                      onOpen();
+                    }
+                  : () => {
+                      return;
+                    }
+              }
+            >
+              Stage
+            </MenuItem>
+            <MenuItem
+              onClick={
+                props.openDrawer === undefined || props.openDrawer !== false
+                  ? () => {
+                      onOpen();
+                    }
+                  : () => {
+                      return;
+                    }
+              }
+            >
+              Tags
+            </MenuItem>
+            <MenuItem
+              onClick={
+                props.openDrawer === undefined || props.openDrawer !== false
+                  ? () => {
+                      onOpen();
+                    }
+                  : () => {
+                      return;
+                    }
+              }
+            >
+              Roles
+            </MenuItem>
+            <MenuItem
+              onClick={
+                props.openDrawer === undefined || props.openDrawer !== false
+                  ? () => {
+                      onOpen();
+                    }
+                  : () => {
+                      return;
+                    }
+              }
+            >
+              Emails
+            </MenuItem>
+          </MenuList>
+        </Menu>{' '}
+      </Box>
+     <Customtab/>
+      <CustomDrawer
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        maintitle="Task">
+        {props.onClickDispaly}
+      </CustomDrawer>
     </Box>
   );
 };
