@@ -18,11 +18,24 @@ const NewProject = () => {
           <option value="option3">Option 3</option>
         </Select>
       </InputWrapper>
+      <InputWrapper title="Stage">
+        <Select placeholder="Select option">
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </Select>
+      </InputWrapper>
       <InputWrapper title="Deadline">
         <Input type="Date" />
       </InputWrapper>
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  return {
+    props: {},
+  };
+}
 
 export default NewProject;
