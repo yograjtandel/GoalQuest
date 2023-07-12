@@ -41,7 +41,7 @@ export default function App({ Component, session, ...pageProps }) {
                   <Sidebar display="flex" justifyContent="start" />
                 </GridItem>
                 <GridItem area={'main'} h={'100%'}>
-                  <Header title={'All Tickets'} />
+                  <Header />
                   <Component {...pageProps} />
                 </GridItem>
               </Grid>

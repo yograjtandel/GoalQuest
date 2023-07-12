@@ -1,4 +1,5 @@
 import useAction from '@/src/hooks/use-Action';
+import { Button } from '@chakra-ui/react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
 export default function Home() {
@@ -40,7 +41,7 @@ export default function Home() {
     return (
       <>
         Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
+        <Button onClick={() => signOut()}>Sign out</Button>
       </>
     );
   }
@@ -48,8 +49,8 @@ export default function Home() {
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-      <button
+      <Button onClick={() => signIn()}>Sign in</Button>
+      <Button
         onClick={() =>
           signIn(
             'auth0',
@@ -59,8 +60,7 @@ export default function Home() {
         }
       >
         Sign up
-      </button>
-      <button onClick={() => signup()}>test sign up</button>
+      </Button>
     </>
   );
 }
