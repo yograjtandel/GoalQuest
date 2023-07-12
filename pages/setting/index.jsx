@@ -1,108 +1,28 @@
 import {
   Box,
   Accordion,
-  Input,
-  Button,
-  Checkbox,
-  Select,
 } from '@chakra-ui/react';
 
-import AccordionItem from '@/src/components/ui/AccordianItem';
-import { InputWrapper } from '@/src/components/form';
+import Tag from '@/src/components/setting/Tag';
+import action from '@/src/utility/action';
+import Stage from '@/src/components/setting/Stage';
+import Role from '@/src/components/setting/Role';
+import User from '@/src/components/setting/User';
 
-import Action from '@/src/helper/action';
-
-const setting = () => {
+const setting = (props) => {
+  const { rights } = props.pageProps;
+  
   return (
     <Box p={4} w={'100%'} display={'flex'} justifyContent={'start'}>
       <Accordion w={'70%'} allowToggle={'true'}>
         {/* accordion 1 */}
-        <AccordionItem title="Stage">
-          <InputWrapper title="Name">
-            <Input type="text" />
-          </InputWrapper>
-          <Button
-            color={'white'}
-            bg={'secondary.400'}
-            size={'sm'}
-            _hover={{
-              bg: 'primary.400',
-            }}
-          >
-            Save
-          </Button>
-        </AccordionItem>
+        <Stage />
         {/* accordion 2 */}
-        <AccordionItem title="Tag">
-          <InputWrapper title="Name">
-            <Input type="text" />
-          </InputWrapper>
-          <Button
-            color={'white'}
-            bg={'secondary.400'}
-            size={'sm'}
-            _hover={{
-              bg: 'primary.400',
-            }}
-          >
-            Save
-          </Button>
-        </AccordionItem>
+        <Tag />
         {/* accordion 3 */}
-        <AccordionItem title="Role">
-          <InputWrapper title="Name">
-            <Input type="text" />
-          </InputWrapper>
-          <InputWrapper title="Permission">
-            <Box display={'flex'} flexDirection={'column'} w={'50%'}>
-              <Checkbox w={'fit-content'} defaultChecked fontWeight={'normal'}>
-                Create
-              </Checkbox>
-              <Checkbox w={'fit-content'} defaultChecked fontWeight={'normal'}>
-                Update
-              </Checkbox>
-              <Checkbox w={'fit-content'} defaultChecked fontWeight={'normal'}>
-                Delete
-              </Checkbox>
-            </Box>
-          </InputWrapper>
-          <Button
-            color={'white'}
-            bg={'secondary.400'}
-            size={'sm'}
-            _hover={{
-              bg: 'primary.400',
-            }}
-          >
-            Save
-          </Button>
-        </AccordionItem>
+        <Role rights={rights} />
         {/* Accordion 4 */}
-        <AccordionItem title="User">
-          <InputWrapper title="Role">
-            <Select placeholder="Select option">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </Select>
-          </InputWrapper>
-          <InputWrapper title="Email">
-            <Input placeholder="test@ncm.com" />
-          </InputWrapper>
-          <InputWrapper title="Name">
-            <Input type="text" />
-          </InputWrapper>
-          <Button
-            color={'white'}
-            bg={'secondary.400'}
-            size={'sm'}
-            _hover={{
-              bg: 'primary.400',
-            }}
-          >
-            Save
-          </Button>
-        </AccordionItem>
+        <User />
       </Accordion>
     </Box>
   );
@@ -111,10 +31,16 @@ const setting = () => {
 export default setting;
 
 export const getServerSideProps = async () => {
-  const res = await Action({
-    method: 'get',
-    url: '/v1/rights/',
-  });
+  let rightsDoc = [];
+  try {
+    const res = await action({
+      method: 'get',
+      url: '/v1/rights?limit=0',
+    });
+    rightsDoc = res.data.results;
+  } catch (e) {
+    console.log(e);
+  }
 
-  return { props: {} };
+  return { props: { rights: rightsDoc } };
 };

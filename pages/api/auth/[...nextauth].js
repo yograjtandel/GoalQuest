@@ -15,6 +15,7 @@ export const authOptions = {
   callbacks: {
     session: async ({ session, token, user }) => {
       session.role = user.role || 'not_authorised';
+      session.id = user.id;
       return Promise.resolve(session);
     },
   },
