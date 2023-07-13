@@ -38,7 +38,6 @@ const Role = (props) => {
   ));
 
   const CreateRole = async () => {
-    debugger
     await Action({
       method: 'post',
       url: '/v1/roles',

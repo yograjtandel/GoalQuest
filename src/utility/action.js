@@ -23,7 +23,7 @@ const action = async (args) => {
       data: data,
     };
   }
-
+  debugger
   const res = await axios(config)
     .then((response) => {
       return response;

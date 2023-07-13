@@ -16,12 +16,12 @@ import { NewProject } from '../project';
 import { header_heading } from '@/src/store/global/global.slice';
 import { useSelector } from 'react-redux';
 
-const Header = () => {
+const Header = (props) => {
+  const { stages } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState('');
   const HeaderHeading = useSelector(header_heading);
 
-  console.log(HeaderHeading);
   const onMenuClickHAndler = (e) => {
     setTitle(e.target.name);
     onOpen();
@@ -84,7 +84,7 @@ const Header = () => {
         maintitle={`New ${title}`}
       >
         {title === 'ticket' && <NewTask />}
-        {title === 'project' && <NewProject />}
+        {title === 'project' && <NewProject stages={stages} />}
       </CustomDrawer>
     </>
   );

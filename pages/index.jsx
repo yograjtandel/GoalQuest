@@ -6,7 +6,6 @@ export default function Home() {
   const { Action, Response, Error } = useAction();
 
   async function signup() {
-    debugger;
     const auth0Response = await fetch(
       `https://dev-c0a3javl4d5ua32y.us.auth0.com/dbconnections/signup`,
       {
@@ -23,7 +22,6 @@ export default function Home() {
       }
     );
     const body = await auth0Response.json();
-    debugger;
 
     await Action({
       method: 'post',
@@ -34,7 +32,6 @@ export default function Home() {
         name: 'new',
       },
     });
-    debugger;
   }
   const { data: session } = useSession();
   if (session) {

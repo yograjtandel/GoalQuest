@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import Theme from '../src/theme/index';
 import '../public/assets/css/style.css';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store from '@/src/store/store';
 import { SessionProvider } from 'next-auth/react';
 import { NotificationContextProvider } from '@/src/store/context/Notification';

@@ -16,10 +16,8 @@ const useAction = () => {
     //     type: 'error',
     //   },
     // ]);
-    // debugger;
 
     const res = await action(args);
-    debugger;
     if (res.data.error) {
       SetError(res.data.error);
       NotificationCtx.addNotifications([
