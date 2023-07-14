@@ -10,16 +10,19 @@ import {
 } from '@chakra-ui/react';
 import CustomDrawer from '../drawer';
 import { NewTask } from '../task';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { AddIcon } from '@chakra-ui/icons';
 import { NewProject } from '../project';
+import { header_heading } from '@/src/store/global/global.slice';
+import { useSelector } from 'react-redux';
 
 const Header = (props) => {
+  const { stages } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState('');
+  const HeaderHeading = useSelector(header_heading);
 
   const onMenuClickHAndler = (e) => {
-    debugger;
     setTitle(e.target.name);
     onOpen();
   };
@@ -34,7 +37,7 @@ const Header = (props) => {
         justifyContent={'space-between'}
         alignItems={'center'}
       >
-        <Heading fontSize={'1.4rem'}>{props.title}</Heading>
+        <Heading fontSize={'1.4rem'}>{HeaderHeading}</Heading>
         <Box display={'flex'}>
           <Menu>
             <MenuButton
@@ -78,10 +81,10 @@ const Header = (props) => {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        maintitle={`New ${title}`}
+        maintitle={title}
       >
         {title === 'ticket' && <NewTask />}
-        {title === 'project' && <NewProject />}
+        {title === 'project' && <NewProject stages={stages} />}
       </CustomDrawer>
     </>
   );

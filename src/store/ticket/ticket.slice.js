@@ -6,7 +6,7 @@ const initialState = {
   ticket: {
     title: '',
     project_id: '',
-    deadline: new Date(),
+    deadline: new Date().toJSON(),
     description: '',
     priority: '',
     createdBy: '',
@@ -25,9 +25,8 @@ const ticketSlice = createSlice({
   },
 });
 
-export const ticket = (state) => state.ticket;
-export const tickets = (state) => state.tickets;
-
-export const { UpdateTicketForm } = ticketSlice.actions;
+export const ticket = (state) => state.ticket.ticket;
+export const tickets = (state) => state.ticket.tickets;
+export const { updateTicketForm: UpdateTicketForm } = ticketSlice.actions;
 
 export default ticketSlice.reducer;
