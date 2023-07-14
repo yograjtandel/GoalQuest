@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateProjectForm } from './project.reducers';
+import { CreateProject } from './project.action';
 
 const initialState = {
   form: {
@@ -7,6 +8,7 @@ const initialState = {
     description: '',
     manager: '',
     stage: '',
+    deadline: '',
   },
 };
 const projectSlice = createSlice({
@@ -15,9 +17,14 @@ const projectSlice = createSlice({
   reducers: {
     updateProjectForm,
   },
+  extraReducers: (builder) => {
+    builder.addCase(CreateProject.fulfilled, (state, action) => {
+      //   state.managers = [...action.payload];
+    });
+  },
 });
 
-export const header_heading = (state) => state.global.heading;
+export const formData = (state) => state.project.form;
 
 export const { updateProjectForm: UpdateProjectForm } = projectSlice.actions;
 

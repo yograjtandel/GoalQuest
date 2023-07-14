@@ -1,12 +1,14 @@
 import action from '@/src/utility/action';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const getStagesData = createAsyncThunk(
-  'global/setInitialData',
-  async () => {
+export const CreateProject = createAsyncThunk(
+  'global/CreateProject',
+  async (data) => {
+    debugger;
     const res = await action({
-      method: 'get',
-      url: '/v1/stage?limit=0',
+      method: 'post',
+      url: '/v1/project',
+      data,
     });
     return res.data.results;
   }

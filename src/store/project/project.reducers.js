@@ -1,3 +1,4 @@
 export const updateProjectForm = (state, action) => {
-  state.ticket = { ...state.form, ...action.apyload };
+  const { key, value } = action.payload;
+  state.form = { ...state.form, [key]: value };
 };

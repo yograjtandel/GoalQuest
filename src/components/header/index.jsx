@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import CustomDrawer from '../drawer';
 import { NewTask } from '../task';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { AddIcon } from '@chakra-ui/icons';
 import { NewProject } from '../project';
 import { header_heading } from '@/src/store/global/global.slice';
@@ -81,7 +81,7 @@ const Header = (props) => {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        maintitle={`New ${title}`}
+        maintitle={title}
       >
         {title === 'ticket' && <NewTask />}
         {title === 'project' && <NewProject stages={stages} />}
