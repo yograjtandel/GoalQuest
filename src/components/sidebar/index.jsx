@@ -11,7 +11,7 @@ const LinkItems = [
   { icon: <BiHome />, href: '/', Heading: 'Home' },
 
   { icon: <BiLayerPlus />, href: '/project', Heading: 'Project' },
-  { icon: <BiTask />, href: '/ticket', Heading: 'Ticket' },
+  { icon: <BiTask />, href: '/task', Heading: 'Task' },
   { icon: <BiCog />, href: '/setting', Heading: 'Setting' },
 ];
 const Sidebar = () => {

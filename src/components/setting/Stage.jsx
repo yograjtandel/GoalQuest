@@ -1,48 +1,31 @@
 import { Button, Input } from '@chakra-ui/react';
 import { InputWrapper } from '../form';
-import { useState } from 'react';
-import useAction from '@/src/hooks/use-Action';
-import { useSession } from 'next-auth/react';
-import CustomAccordinaItem from '../ui/AccordianItem';
+import { StageFormData, UpdateStageForm } from '@/src/store/stage/stage.slice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Stage = () => {
-  const session = useSession();
-  const [Title, setTitle] = useState('');
-  const { Action, Response, Error } = useAction();
+  const FormData = useSelector(StageFormData);
+  const dispatch = useDispatch();
 
-  const CreateStag = async () => {
-    const TagRes = await Action({
-      method: 'post',
-      url: '/v1/stage',
-      data: {
-        title: Title,
-        createdBy: session.data.id,
-      },
-    });
+  const fieldChangeHandler = (e) => {
+    dispatch(
+      UpdateStageForm({
+        value: e.target.value,
+        key: e.target.name,
+      })
+    );
   };
   return (
-    <CustomAccordinaItem title="Stage">
+    <>
       <InputWrapper title="Name">
         <Input
           type="text"
-          value={Title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
+          name="title"
+          value={FormData.name}
+          onChange={(e) => fieldChangeHandler(e)}
         />
       </InputWrapper>
-      <Button
-        color={'white'}
-        bg={'secondary.400'}
-        size={'sm'}
-        _hover={{
-          bg: 'primary.400',
-        }}
-        onClick={CreateStag}
-      >
-        Save
-      </Button>
-    </CustomAccordinaItem>
+    </>
   );
 };
 

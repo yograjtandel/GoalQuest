@@ -17,7 +17,7 @@ export const getManagerData = createAsyncThunk(
     async () => {
       const res = await action({
         method: 'get',
-        url: '/v1/users?limit=0',
+        url: '/v1/user?limit=0',
       });
       return res.data.results;
     }

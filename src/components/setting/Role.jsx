@@ -1,26 +1,43 @@
-import { Box, Button, Checkbox, Input } from '@chakra-ui/react';
+import { Box, Checkbox, Input } from '@chakra-ui/react';
 import { InputWrapper } from '../form';
-import CustomAccordinaItem from '../ui/AccordianItem';
-import { useSession } from 'next-auth/react';
-import { useState } from 'react';
-import useAction from '@/src/hooks/use-Action';
+import { UpdateRoleForm } from '@/src/store/role/role.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RoleFormData } from '@/src/store/role/role.slice';
 
 const Role = (props) => {
   const { rights } = props;
-  const session = useSession();
-  const [Title, setTitle] = useState('');
-  const [Rights, setRights] = useState([]);
-  const { Action, Response, Error } = useAction();
+  const FormData = useSelector(RoleFormData);
+  const dispatch = useDispatch();
+  console.log(FormData);
+  const fieldChangeHandler = (e) => {
+    dispatch(
+      UpdateRoleForm({
+        value: e.target.value,
+        key: e.target.name,
+      })
+    );
+  };
 
   const checkbocChangeHandler = (value) => {
-    let rights = [...Rights];
+    debugger;
+    let rights = [...FormData.rights];
     const index = rights.findIndex((val) => val === value);
 
     if (index !== -1) {
       rights.splice(index, 1);
-      setRights(rights);
+      dispatch(
+        UpdateRoleForm({
+          value: rights,
+          key: 'rights',
+        })
+      );
     } else {
-      setRights((prev) => [...prev, value]);
+      dispatch(
+        UpdateRoleForm({
+          value: [...rights, value],
+          key: 'rights',
+        })
+      );
     }
   };
 
@@ -37,26 +54,14 @@ const Role = (props) => {
     </Checkbox>
   ));
 
-  const CreateRole = async () => {
-    await Action({
-      method: 'post',
-      url: '/v1/roles',
-      data: {
-        name: Title,
-        rights: Rights,
-        createdBy: session.data.id,
-      },
-    });
-  };
   return (
-    <CustomAccordinaItem title="Role">
+    <>
       <InputWrapper title="Name">
         <Input
           type="text"
-          value={Title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
+          name="name"
+          value={FormData.name}
+          onChange={(e) => fieldChangeHandler(e)}
         />
       </InputWrapper>
       <InputWrapper title="Permission">
@@ -64,18 +69,7 @@ const Role = (props) => {
           {rights_list}
         </Box>
       </InputWrapper>
-      <Button
-        color={'white'}
-        bg={'secondary.400'}
-        size={'sm'}
-        _hover={{
-          bg: 'primary.400',
-        }}
-        onClick={CreateRole}
-      >
-        Save
-      </Button>
-    </CustomAccordinaItem>
+    </>
   );
 };
 
