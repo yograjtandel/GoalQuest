@@ -50,6 +50,7 @@ const CustomDrawer = (props) => {
   const SubmitHandler = (e) => {
     e.preventDefault();
     const { action, data } = getAction();
+    debugger
     const res = dispatch(action({ ...data, createdBy: session.data.id }));
   };
   return (

@@ -2,10 +2,16 @@ import { Input, Select, Textarea } from '@chakra-ui/react';
 import { InputWrapper } from '../form';
 import { TaskFormData, UpdateTaskForm } from '@/src/store/task/task.slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { globalData } from '@/src/store/global/global.slice';
+
 const TaskBasicDetailForm = () => {
   const FormData = useSelector(TaskFormData);
+  const globalFormData = useSelector(globalData);
+  const { projects, tags, users, stages } = globalFormData;
+
   const dispatch = useDispatch();
   const fieldChangeHandler = (e) => {
+    debugger;
     dispatch(
       UpdateTaskForm({
         value: e.target.value,
@@ -13,6 +19,26 @@ const TaskBasicDetailForm = () => {
       })
     );
   };
+
+  const projectOptions = projects.map((project) => (
+    <option value={project.id}>{project.name}</option>
+  ));
+
+  const tagsOptions = tags.map((tag) => (
+    <option value={tag.id}>{tag.title}</option>
+  ));
+  const usersOptions = users.map((user) => (
+    <option value={user.id}>{user.name}</option>
+  ));
+  debugger;
+  const stagesOptions = stages.map((stage) => (
+    <option value={stage.id}>{stage.title}</option>
+  ));
+
+  const priorityOptions = ['low', 'medium', 'high', 'urgent'].map(
+    (priority) => <option value={priority}>{priority}</option>
+  );
+
   return (
     <>
       <InputWrapper title="Title">
@@ -30,9 +56,7 @@ const TaskBasicDetailForm = () => {
           value={FormData.project_id}
           onChange={(e) => fieldChangeHandler(e)}
         >
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          {projectOptions}
         </Select>
       </InputWrapper>
       <InputWrapper title="Deadline">
@@ -50,21 +74,27 @@ const TaskBasicDetailForm = () => {
           value={FormData.asignee}
           onChange={(e) => fieldChangeHandler(e)}
         >
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          {usersOptions}
         </Select>
       </InputWrapper>
-      <InputWrapper
-        title="Tag"
-        name="tag"
-        value={FormData.tag}
-        onChange={(e) => fieldChangeHandler(e)}
-      >
-        <Select placeholder="Select option">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+      <InputWrapper title="Stag">
+        <Select
+          placeholder="Select option"
+          name="stage"
+          value={FormData.stage}
+          onChange={(e) => fieldChangeHandler(e)}
+        >
+          {stagesOptions}
+        </Select>
+      </InputWrapper>
+      <InputWrapper title="Tag">
+        <Select
+          placeholder="Select option"
+          name="tag"
+          value={FormData.tag}
+          onChange={(e) => fieldChangeHandler(e)}
+        >
+          {tagsOptions}
         </Select>
       </InputWrapper>
       <InputWrapper title="Priority">
@@ -74,9 +104,7 @@ const TaskBasicDetailForm = () => {
           value={FormData.priority}
           onChange={(e) => fieldChangeHandler(e)}
         >
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          {priorityOptions}
         </Select>
       </InputWrapper>
       <InputWrapper

@@ -3,6 +3,7 @@ import Notificationpill from './NotificationPill';
 import NotificationWraper from './NotificationWraper';
 import NotificationContext from '@/src/store/context/Notification';
 import {
+    getInitialData,
   getManagerData,
   getStagesData,
 } from '@/src/store/global/global.action';
@@ -14,6 +15,7 @@ const Notification = () => {
   useEffect(() => {
     dispatch(getStagesData());
     dispatch(getManagerData());
+    dispatch(getInitialData());
   }, []);
   const list = NotificationCtx.Notifications.map((item) => (
     <Notificationpill status={item.type} msg={item.msg} key={item.id} />
