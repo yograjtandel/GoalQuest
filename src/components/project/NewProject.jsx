@@ -1,6 +1,9 @@
 import { managers, stages } from '@/src/store/global/global.slice';
 import { CreateProject } from '@/src/store/project/project.action';
-import { UpdateProjectForm, formData } from '@/src/store/project/project.slice';
+import {
+  UpdateProjectForm,
+  ProjectFormData,
+} from '@/src/store/project/project.slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const { Input, Select, Textarea } = require('@chakra-ui/react');
@@ -9,7 +12,7 @@ const { default: InputWrapper } = require('../form/InputWrapper');
 const NewProject = () => {
   const projectStages = useSelector(stages);
   const projectManagers = useSelector(managers);
-  const FormData = useSelector(formData);
+  const FormData = useSelector(ProjectFormData);
   const dispatch = useDispatch();
   const stageOptions = projectStages.map((stage) => {
     return (

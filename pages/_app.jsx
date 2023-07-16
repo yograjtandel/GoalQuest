@@ -12,41 +12,56 @@ import Sidebar from '../src/components/sidebar';
 import Header from '../src/components/header';
 import Notification from '@/src/components/ui/Notification';
 
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
 export default function App({ Component, session, ...pageProps }) {
+  const [isWeb, setIsWeb] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    if (router.pathname.startsWith('/web')) {
+      setIsWeb(true);
+    }
+  }, []);
   return (
     <SessionProvider session={session}>
       <NotificationContextProvider>
         <ChakraProvider theme={Theme}>
-          <Provider store={store}>
-            <Notification />
-            <Box w="100%" h={'100%'} minH={'100vh'}>
-              <Grid
-                border={'1px solid black'}
-                templateAreas={{
-                  base: `"main"`,
-                  md: `"nav main"`,
-                  lg: `nav main`,
-                }}
-                gridTemplateColumns={'80px 1fr'}
-                gap="0"
-                color="blackAlpha.700"
-                fontWeight="bold"
-                minH={'100vh'}
-              >
-                <GridItem
-                  area={'nav'}
-                  justifyContent={'start'}
-                  alignItems={'start'}
+          {!isWeb && (
+            <Provider store={store}>
+              <Notification />
+              <Box w="100%" h={'100%'} minH={'100vh'}>
+                <Grid
+                  border={'1px solid black'}
+                  templateAreas={{
+                    base: `"main"`,
+                    md: `"nav main"`,
+                    lg: `nav main`,
+                  }}
+                  gridTemplateColumns={'80px 1fr'}
+                  gap="0"
+                  color="blackAlpha.700"
+                  fontWeight="bold"
+                  minH={'100vh'}
                 >
-                  <Sidebar display="flex" justifyContent="start" />
-                </GridItem>
-                <GridItem area={'main'} h={'100%'}>
-                  <Header />
-                  <Component {...pageProps} />
-                </GridItem>
-              </Grid>
-            </Box>
-          </Provider>
+                  <GridItem
+                    area={'nav'}
+                    justifyContent={'start'}
+                    alignItems={'start'}
+                  >
+                    <Sidebar display="flex" justifyContent="start" />
+                  </GridItem>
+                  <GridItem area={'main'} h={'100%'} overflow={'hidden'}>
+                    <Header />
+                    <Box p={2}>
+                      <Component {...pageProps} />
+                    </Box>
+                  </GridItem>
+                </Grid>
+              </Box>
+            </Provider>
+          )}
+          {isWeb && <Component {...pageProps} />}
         </ChakraProvider>
       </NotificationContextProvider>
     </SessionProvider>

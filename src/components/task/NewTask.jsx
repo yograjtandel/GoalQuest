@@ -23,7 +23,7 @@ import {
 import CustomDrawer from '../drawer';
 import { useRef, useState } from 'react';
 import { InputWrapper } from '../form';
-import { LogTime, ParentChildTask } from './index';
+import { LogTime, TaskBasicDetailForm } from './index';
 import CustomCard from '../card';
 import { AddIcon } from '@chakra-ui/icons';
 const NewTask = () => {
@@ -49,50 +49,7 @@ const NewTask = () => {
   };
   return (
     <>
-      <InputWrapper title="Title">
-        <Input type="text" />
-      </InputWrapper>
-      <InputWrapper title="Project">
-        <Select placeholder="Select option">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </Select>
-      </InputWrapper>
-      <InputWrapper title="Deadline">
-        <Input type="Date" />
-      </InputWrapper>
-      <InputWrapper title="Assignee">
-        <Select placeholder="Select option">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </Select>
-      </InputWrapper>
-      <InputWrapper title="Tag">
-        <Select placeholder="Select option">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </Select>
-      </InputWrapper>
-      <InputWrapper title="Stage">
-        <Select placeholder="Select option">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </Select>
-      </InputWrapper>
-      <InputWrapper title="Description">
-        <Textarea placeholder="Here is a sample placeholder" />
-      </InputWrapper>
-      <InputWrapper title="Priority">
-        <Select placeholder="Select option">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </Select>
-      </InputWrapper>
+      <TaskBasicDetailForm />
       <Box>
         <Accordion shadow={'xl'} allowToggle={'true'} mt={2}>
           <AccordionItem>
@@ -132,7 +89,6 @@ const NewTask = () => {
               <AccordionButton
                 px={'4'}
                 bg={'none'}
-                onClick={childTaskHandler}
                 borderBottom={'1px solid'}
                 borderColor={'gray.300'}
               >
@@ -142,6 +98,23 @@ const NewTask = () => {
                 <AccordionIcon />
               </AccordionButton>
             </h2>
+            <AccordionPanel pb={4}>
+              <Box w={'100%'} display={'flex'} justifyContent={'end'} mb={2}>
+                <Button
+                  size={'sm'}
+                  onClick={childTaskHandler}
+                  bg={'secondary.400'}
+                  color={'white'}
+                  _hover={{ bg: 'primary.400' }}
+                >
+                  <AddIcon />
+                </Button>
+              </Box>
+              <Flex justifyContent={'space-between'} flexWrap={'wrap'}>
+                <CustomCard />
+                <CustomCard />
+              </Flex>
+            </AccordionPanel>
           </AccordionItem>
           <AccordionItem>
             <h2>
@@ -203,7 +176,7 @@ const NewTask = () => {
           size={'md'}
           maintitle={`${maintitle} Title`}
         >
-          {!isLogtime && <ParentChildTask />}
+          {!isLogtime && <TaskBasicDetailForm />}
           {isLogtime && <LogTime />}
         </CustomDrawer>
       </Box>

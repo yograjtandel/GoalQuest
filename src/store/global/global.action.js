@@ -13,12 +13,23 @@ export const getStagesData = createAsyncThunk(
 );
 
 export const getManagerData = createAsyncThunk(
-    'global/getManagerData',
-    async () => {
-      const res = await action({
-        method: 'get',
-        url: '/v1/users?limit=0',
-      });
-      return res.data.results;
-    }
-  );
+  'global/getManagerData',
+  async () => {
+    const res = await action({
+      method: 'get',
+      url: '/v1/user?limit=0',
+    });
+    return res.data.results;
+  }
+);
+
+export const getInitialData = createAsyncThunk(
+  'global/getInitialData',
+  async () => {
+    const res = await action({
+      method: 'get',
+      url: '/v1/task/taskinitialdata?limit=0',
+    });
+    return res.data;
+  }
+);

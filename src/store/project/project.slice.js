@@ -24,7 +24,7 @@ const projectSlice = createSlice({
   },
 });
 
-export const formData = (state) => state.project.form;
+export const ProjectFormData = (state) => state.project.form;
 
 export const { updateProjectForm: UpdateProjectForm } = projectSlice.actions;
 

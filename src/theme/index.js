@@ -16,8 +16,8 @@ const Theme = extendTheme({
     },
   },
   fonts: {
-    heading: `'Open Sans', sans-serif`,
-    body: `'Raleway', sans-serif`,
+    heading: `'Open Sans'`,
+    body: `'Raleway'`,
   },
   fontSizes: {
     xs: '0.75rem',

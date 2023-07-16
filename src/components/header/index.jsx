@@ -36,6 +36,7 @@ const Header = (props) => {
         display={'Flex'}
         justifyContent={'space-between'}
         alignItems={'center'}
+        overflow={'hidden'}
       >
         <Heading fontSize={'1.4rem'}>{HeaderHeading}</Heading>
         <Box display={'flex'}>
@@ -55,8 +56,8 @@ const Header = (props) => {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem onClick={onMenuClickHAndler} name="ticket">
-                Ticket
+              <MenuItem onClick={onMenuClickHAndler} name="task">
+                Task
               </MenuItem>
               <MenuItem onClick={onMenuClickHAndler} name="project">
                 Project
@@ -83,7 +84,7 @@ const Header = (props) => {
         onClose={onClose}
         maintitle={title}
       >
-        {title === 'ticket' && <NewTask />}
+        {title === 'task' && <NewTask />}
         {title === 'project' && <NewProject stages={stages} />}
       </CustomDrawer>
     </>

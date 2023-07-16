@@ -1,10 +1,9 @@
 import { Button, Checkbox, Input, Select } from '@chakra-ui/react';
 import { InputWrapper } from '../form';
-import CustomAccordinaItem from '../ui/AccordianItem';
 
 const User = () => {
   return (
-    <CustomAccordinaItem title="User">
+    <>
       <InputWrapper title="Role">
         <Select placeholder="Select option">
           <option value="option1">Option 1</option>
@@ -28,7 +27,7 @@ const User = () => {
       >
         Save
       </Button>
-    </CustomAccordinaItem>
+    </>
   );
 };
 
