@@ -26,20 +26,52 @@ import { InputWrapper } from '../form';
 import { LogTime, TaskBasicDetailForm } from './index';
 import CustomCard from '../card';
 import { AddIcon } from '@chakra-ui/icons';
+import {
+  ChildTaskFormData,
+  OtherData,
+  ParentTaskFormData,
+  TaskFormData,
+  UpdateTaskForm,
+} from '@/src/store/task/task.slice';
+import { useDispatch, useSelector } from 'react-redux';
+
 const NewTask = () => {
   const [maintitle, setTitle] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLogtime, setIsLogtime] = useState(false);
+  const dispatch = useDispatch();
+  const taskFormData = useSelector(TaskFormData);
+  const parentTaskFormData = useSelector(ParentTaskFormData);
+  const childTaskFormData = useSelector(ChildTaskFormData);
+  const otherData = useSelector(OtherData);
 
-  const parentTaskHandler = () => {
+  const parentTaskHandler = (e) => {
     setIsLogtime(false);
-    setTitle('Parent');
+    setTitle('parent');
+    dispatch(
+      UpdateTaskForm({
+        value: {
+          isParentTask: true,
+          isChildTask: false,
+        },
+        key: 'other',
+      })
+    );
     onOpen();
   };
 
-  const childTaskHandler = () => {
+  const childTaskHandler = (e) => {
     setIsLogtime(false);
-    setTitle('Child');
+    setTitle('child');
+    dispatch(
+      UpdateTaskForm({
+        value: {
+          isParentTask: false,
+          isChildTask: true,
+        },
+        key: 'other',
+      })
+    );
     onOpen();
   };
 
@@ -47,9 +79,10 @@ const NewTask = () => {
     setIsLogtime(true);
     onOpen();
   };
+
   return (
     <>
-      <TaskBasicDetailForm />
+      <TaskBasicDetailForm parent_key="task" data={taskFormData} />
       <Box>
         <Accordion shadow={'xl'} allowToggle={'true'} mt={2}>
           <AccordionItem>
@@ -70,7 +103,8 @@ const NewTask = () => {
               <Box w={'100%'} display={'flex'} justifyContent={'end'} mb={2}>
                 <Button
                   size={'sm'}
-                  onClick={parentTaskHandler}
+                  id="isParentTask"
+                  onClick={(e) => parentTaskHandler(e)}
                   bg={'secondary.400'}
                   color={'white'}
                   _hover={{ bg: 'primary.400' }}
@@ -102,7 +136,8 @@ const NewTask = () => {
               <Box w={'100%'} display={'flex'} justifyContent={'end'} mb={2}>
                 <Button
                   size={'sm'}
-                  onClick={childTaskHandler}
+                  id="isChildTask"
+                  onClick={(e) => childTaskHandler(e)}
                   bg={'secondary.400'}
                   color={'white'}
                   _hover={{ bg: 'primary.400' }}
@@ -174,9 +209,16 @@ const NewTask = () => {
           onOpen={onOpen}
           onClose={onClose}
           size={'md'}
-          maintitle={`${maintitle} Title`}
+          maintitle={`${maintitle}`}
         >
-          {!isLogtime && <TaskBasicDetailForm />}
+          {!isLogtime && (
+            <TaskBasicDetailForm
+              parent_key={maintitle === 'parent' ? 'parent_task' : 'child_task'}
+              data={
+                otherData.isParentTask ? parentTaskFormData : childTaskFormData
+              }
+            />
+          )}
           {isLogtime && <LogTime />}
         </CustomDrawer>
       </Box>

@@ -7,6 +7,10 @@ export const updateTask = (task, taskId) => {
 };
 
 export const updateTaskForm = (state, action) => {
-  const { key, value } = action.payload;
-  state.task = { ...state.task, [key]: value };
+  const { key, parent_key, value } = action.payload;
+  if (parent_key) {
+    state[parent_key] = { ...state[parent_key], [key]: value };
+    return;
+  }
+  state[key] = { ...state[key], ...value };
 };

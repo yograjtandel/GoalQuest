@@ -8,7 +8,6 @@ const Role = (props) => {
   const { rights } = props;
   const FormData = useSelector(RoleFormData);
   const dispatch = useDispatch();
-  console.log(FormData);
   const fieldChangeHandler = (e) => {
     dispatch(
       UpdateRoleForm({
@@ -19,7 +18,6 @@ const Role = (props) => {
   };
 
   const checkbocChangeHandler = (value) => {
-    debugger;
     let rights = [...FormData.rights];
     const index = rights.findIndex((val) => val === value);
 

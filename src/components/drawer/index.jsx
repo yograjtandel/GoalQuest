@@ -20,12 +20,20 @@ import { RoleFormData } from '@/src/store/role/role.slice';
 import { CreateRole } from '@/src/store/role/role.action';
 import { TagFormData } from '@/src/store/tag/tag.slice';
 import { CreateTag } from '@/src/store/tag/tag.action';
-import { TaskFormData } from '@/src/store/task/task.slice';
+import {
+  ChildTaskFormData,
+  ParentTaskFormData,
+  TaskFormData,
+  UpdateTaskForm,
+} from '@/src/store/task/task.slice';
 import { CreateTask } from '@/src/store/task/task.action';
 
 const CustomDrawer = (props) => {
-  const { maintitle } = props;
+  const { maintitle, isOpen, onClose, btnRef, size, children } = props;
+
   const taskFormData = useSelector(TaskFormData);
+  const parentTaskFormData = useSelector(ParentTaskFormData);
+  const childTaskFormData = useSelector(ChildTaskFormData);
   const projectFormData = useSelector(ProjectFormData);
   const stageFormData = useSelector(StageFormData);
   const roleFormData = useSelector(RoleFormData);
@@ -36,6 +44,10 @@ const CustomDrawer = (props) => {
     switch (maintitle) {
       case 'task':
         return { data: taskFormData, action: CreateTask };
+      case 'parent':
+        return { data: parentTaskFormData, action: CreateTask };
+      case 'child':
+        return { data: childTaskFormData, action: CreateTask };
       case 'project':
         return { data: projectFormData, action: CreateProject };
       case 'stage':
@@ -47,29 +59,48 @@ const CustomDrawer = (props) => {
     }
   };
 
+  const dialogCloseHandler = () => {
+    // switch (maintitle) {
+    //   case 'task':
+    //   case 'parent':
+    //   case 'child':
+    //     dispatch(
+    //       UpdateTaskForm({
+    //         value: {
+    //           isParentTask: false,
+    //           isChildTask: false,
+    //         },
+    //         key: 'other',
+    //       })
+    //     );
+    // }
+    onClose();
+  };
+
   const SubmitHandler = (e) => {
     e.preventDefault();
+    e.stopPropagation();
+
     const { action, data } = getAction();
-    debugger
     const res = dispatch(action({ ...data, createdBy: session.data.id }));
   };
   return (
     <>
       <Drawer
-        isOpen={props.isOpen}
+        isOpen={isOpen}
         placement="right"
-        onClose={props.onClose}
-        finalFocusRef={props.btnRef}
-        size={props.size || 'lg'}
+        onClose={dialogCloseHandler}
+        finalFocusRef={btnRef}
+        size={size || 'lg'}
       >
         <DrawerOverlay />
         <DrawerContent overflow={'auto'}>
           <form onSubmit={(e) => SubmitHandler(e)}>
             <DrawerCloseButton />
             <DrawerHeader>New {maintitle}</DrawerHeader>
-            <DrawerBody>{props.children}</DrawerBody>
+            <DrawerBody>{children}</DrawerBody>
             <DrawerFooter>
-              <Button variant="outline" mr={3} onClick={props.onClose}>
+              <Button variant="outline" mr={3} onClick={dialogCloseHandler}>
                 Cancel
               </Button>
               <Button colorScheme="blue" type="submit">

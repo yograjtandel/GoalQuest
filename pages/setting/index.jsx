@@ -26,7 +26,6 @@ const setting = (props) => {
   const [title, setTitle] = useState('');
 
   const onMenuClickHAndler = (e) => {
-    debugger;
     setTitle(e.target.name);
     onOpen();
   };

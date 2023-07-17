@@ -14,7 +14,7 @@ import { NewTask } from '@/src/components/task';
 
 const Task = () => {
   return (
-    <Box gap={4} overflowX={'scroll'} display={'flex'} h={'calc(100vh - 70px)'}>
+    <Box gap={4} overflowX={'auto'} display={'flex'} h={'calc(100vh - 70px)'}>
       <Box w={'300px'} minWidth={'300px'}>
         <Box
           display={'flex'}
@@ -34,7 +34,7 @@ const Task = () => {
             <Menu>
               <MenuButton as={Button} bg={'none'}>
                 <AddIcon
-                  Size={'14px'}
+                  size={'14px'}
                   _hover={{ color: 'blue.300', cursor: 'pointer' }}
                 />
               </MenuButton>

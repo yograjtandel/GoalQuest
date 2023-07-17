@@ -4,7 +4,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 export const CreateProject = createAsyncThunk(
   'global/CreateProject',
   async (data) => {
-    debugger;
     const res = await action({
       method: 'post',
       url: '/v1/project',

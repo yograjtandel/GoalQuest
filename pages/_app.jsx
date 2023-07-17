@@ -51,7 +51,7 @@ export default function App({ Component, session, ...pageProps }) {
                   >
                     <Sidebar display="flex" justifyContent="start" />
                   </GridItem>
-                  <GridItem area={'main'} h={'100%'} overflow={'hidden'}>
+                  <GridItem area={'main'} h={'100%'} w={'100%'} overflow={'hidden'}>
                     <Header />
                     <Box p={2}>
                       <Component {...pageProps} />

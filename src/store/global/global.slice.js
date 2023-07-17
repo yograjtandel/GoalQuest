@@ -26,7 +26,6 @@ const globalSlice = createSlice({
     });
 
     builder.addCase(getInitialData.fulfilled, (state, action) => {
-      debugger;
       state.projects = [...action.payload.projects];
       state.tags = [...action.payload.tags];
       state.users = [...action.payload.users];
