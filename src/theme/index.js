@@ -1,8 +1,12 @@
 // 1. Import `extendTheme`
 import { extendTheme } from '@chakra-ui/react';
+import {  MultiSelectTheme } from 'chakra-multiselect'
 
 // 2. Call `extendTheme` and pass your custom values
 const Theme = extendTheme({
+    components: {
+      MultiSelect: MultiSelectTheme },
+
   colors: {
     primary: {
       400: '#1885ad',

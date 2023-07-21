@@ -37,3 +37,7 @@ body {
 .primary-color {
   color: #1a86ae;
 }
+
+Button{
+  cursor: pointer;
+}
