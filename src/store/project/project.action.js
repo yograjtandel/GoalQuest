@@ -12,3 +12,27 @@ export const CreateProject = createAsyncThunk(
     return res.data.results;
   }
 );
+
+export const UpdateProject = createAsyncThunk(
+  'global/UpdateProject',
+  async (data, { getState }) => {
+    const state = getState();
+    const res = await action({
+      method: 'patch',
+      url: `/v1/project/${state.project.form._id}`,
+      data: state.project.form,
+    });
+    return res.data;
+  }
+);
+
+export const GetProjects = createAsyncThunk(
+  'global/GetProjects',
+  async (data) => {
+    const res = await action({
+      method: 'get',
+      url: '/v1/project?group=stage',
+    });
+    return res.data;
+  }
+);

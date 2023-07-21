@@ -1,7 +1,18 @@
 import { Button, Checkbox, Input, Select } from '@chakra-ui/react';
 import { InputWrapper } from '../form';
+import { useDispatch } from 'react-redux';
 
 const User = () => {
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     dispatch(
+//       SetFormMode({
+//         ...otherTaskFormData.form_mode,
+//         stage: mode,
+//       })
+//     );
+//   }, []);
   return (
     <>
       <InputWrapper title="Role">

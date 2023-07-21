@@ -8,10 +8,28 @@ import {
 } from '@chakra-ui/react';
 import CustomDrawer from '../drawer';
 import { BiStar, BiUser, BiCircle } from 'react-icons/bi';
-import NewTask from '../task/NewTask';
 
 const CustomCard = (props) => {
+  const {
+    openDrawer,
+    bg,
+    title,
+    name,
+    children,
+    footer,
+    avatarTolltip,
+    onClickDispaly,
+    onClick,
+    drawer_size,
+  } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const onclickCard = () => {
+    onClick();
+    if (openDrawer === undefined || openDrawer !== false) {
+      onOpen();
+    }
+  };
 
   return (
     <>
@@ -19,54 +37,23 @@ const CustomCard = (props) => {
         w={'100%'}
         h={'100%'}
         mb={4}
-        bg={undefined || props.bg}
-        onClick={
-          props.openDrawer === undefined || props.openDrawer !== false
-            ? () => {
-                onOpen();
-              }
-            : () => {
-                return;
-              }
-        }
+        bg={undefined || bg}
+        onClick={onclickCard}
         _hover={{
           cursor: 'pointer',
           shadow: 'lg',
         }}
       >
-        <CardBody>
-          <Text fontWeight={'400'}> {props.title}</Text>
-          <Text fontWeight={'400'} fontSize={'14px'} color={'gray.500'}>
-            {props.name}
-          </Text>
-          {props.children}
-          {(props.footer === undefined || props.footer !== false) && (
-            <Flex mt={2} justifyContent={'space-between'}>
-              <BiStar />
-              <Flex>
-                <Tooltip
-                  bg={'white'}
-                  color={'black'}
-                  label="Admin"
-                  aria-label="A tooltip"
-                >
-                  <Text me={2}>
-                    <BiUser />
-                  </Text>
-                </Tooltip>
-                <BiCircle />
-              </Flex>
-            </Flex>
-          )}
-        </CardBody>
+        <CardBody>{children}</CardBody>
       </Card>
       <CustomDrawer
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        maintitle="Task"
+        maintitle={title}
+        size={drawer_size}
       >
-        {props.onClickDispaly}
+        {onClickDispaly}
       </CustomDrawer>
     </>
   );

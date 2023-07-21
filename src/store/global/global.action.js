@@ -1,35 +1,15 @@
 import action from '@/src/utility/action';
+import { fetchTaskInitialData } from '@/src/utility/helper';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-export const getStagesData = createAsyncThunk(
-  'global/setInitialData',
-  async () => {
-    const res = await action({
-      method: 'get',
-      url: '/v1/stage?limit=0',
-    });
-    return res.data.results;
-  }
-);
-
-export const getManagerData = createAsyncThunk(
-  'global/getManagerData',
-  async () => {
-    const res = await action({
-      method: 'get',
-      url: '/v1/user?limit=0',
-    });
-    return res.data.results;
-  }
-);
 
 export const getInitialData = createAsyncThunk(
   'global/getInitialData',
-  async () => {
-    const res = await action({
-      method: 'get',
-      url: '/v1/task/taskinitialdata?limit=0',
-    });
-    return res.data;
+  async (arg, { getState }) => {
+    const state = getState();
+    if (!state.global.initialDataFetched) {
+      const res = await fetchTaskInitialData();
+      return res;
+    }
+    return state;
   }
 );

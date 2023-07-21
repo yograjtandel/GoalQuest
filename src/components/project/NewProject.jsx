@@ -1,27 +1,31 @@
-import { managers, stages } from '@/src/store/global/global.slice';
-import { CreateProject } from '@/src/store/project/project.action';
+import { globalData } from '@/src/store/global/global.slice';
 import {
   UpdateProjectForm,
   ProjectFormData,
+  SetFormMode,
+  ProjectOtherData,
 } from '@/src/store/project/project.slice';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const { Input, Select, Textarea } = require('@chakra-ui/react');
 const { default: InputWrapper } = require('../form/InputWrapper');
 
-const NewProject = () => {
-  const projectStages = useSelector(stages);
-  const projectManagers = useSelector(managers);
+const NewProject = (props) => {
+  const { mode } = props;
+  const { stages, managers } = useSelector(globalData);
   const FormData = useSelector(ProjectFormData);
+  const projectOtherData = useSelector(ProjectOtherData);
   const dispatch = useDispatch();
-  const stageOptions = projectStages.map((stage) => {
+
+  const stageOptions = stages.map((stage) => {
     return (
       <option value={stage.id} key={stage.id}>
         {stage.title}
       </option>
     );
   });
-  const managerOptions = projectManagers.map((stage) => {
+  const managerOptions = managers.map((stage) => {
     return (
       <option value={stage.id} key={stage.id}>
         {stage.name}
@@ -80,7 +84,7 @@ const NewProject = () => {
         <Input
           type="Date"
           name="deadline"
-          value={FormData.deadline}
+          value={new Date(FormData.deadline).toISOString().split('T')[0]}
           onChange={(e) => fieldChangeHandler(e)}
         />
       </InputWrapper>

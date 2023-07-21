@@ -50,6 +50,8 @@ const TaskBasicDetailForm = (props) => {
       </option>
     )
   );
+  console.log(new Date(FormData.deadline).toDateString());
+  debugger;
   return (
     <>
       <InputWrapper title="Title">
@@ -74,7 +76,9 @@ const TaskBasicDetailForm = (props) => {
         <Input
           type="Date"
           name="deadline"
-          value={FormData.deadline}
+          //     value='1994-10-04'
+          // //   value="2023-07-25"
+          value={new Date(FormData.deadline).toISOString().split('T')[0]}
           onChange={(e) => fieldChangeHandler(e)}
         />
       </InputWrapper>
@@ -82,7 +86,7 @@ const TaskBasicDetailForm = (props) => {
         <Select
           placeholder="Select option"
           name="asignee"
-          value={FormData.asignee}
+          value={FormData.asignee[0]}
           onChange={(e) => fieldChangeHandler(e)}
         >
           {usersOptions}

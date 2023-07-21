@@ -12,3 +12,11 @@ export const CreateStage = createAsyncThunk(
     return res.data.results;
   }
 );
+
+export const GetStages = createAsyncThunk('global/GetStages', async (data) => {
+  const res = await action({
+    method: 'get',
+    url: '/v1/stage?limit=0',
+  });
+  return res.data.results;
+});

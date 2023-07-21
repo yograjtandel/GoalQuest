@@ -1,7 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Box, Flex, CardBody, Text } from '@chakra-ui/react';
 import Card from '@/src/components/card';
+import { useDispatch } from 'react-redux';
+import { getInitialData } from '@/src/store/global/global.action';
+import { useEffect } from 'react';
+
 const dashboard = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getInitialData());
+  }, []);
+
   const tasktitle = [
     { title: 'Unresolved', taskstatus: 3 },
     { title: 'Overdue', taskstatus: 3 },

@@ -1,9 +1,6 @@
 import {
   Flex,
   Button,
-  Input,
-  Select,
-  Textarea,
   Text,
   useDisclosure,
   Box,
@@ -20,20 +17,27 @@ import {
   Td,
   TableContainer,
 } from '@chakra-ui/react';
+import { v4 as uuidv4 } from 'uuid';
 import CustomDrawer from '../drawer';
-import { useRef, useState } from 'react';
-import { InputWrapper } from '../form';
+import { useState } from 'react';
 import { LogTime, TaskBasicDetailForm } from './index';
 import CustomCard from '../card';
 import { AddIcon } from '@chakra-ui/icons';
 import {
   ChildTaskFormData,
-  OtherData,
   ParentTaskFormData,
+  SetFormMode,
+  SetIntialParentTaskData,
+  SetIntialChildTaskData,
   TaskFormData,
   UpdateTaskForm,
+  childTasks,
+  parentTasks,
+  TaskOtherData,
 } from '@/src/store/task/task.slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { getProject } from '@/src/utility/helper';
+import { globalData } from '@/src/store/global/global.slice';
 
 const NewTask = () => {
   const [maintitle, setTitle] = useState();
@@ -43,7 +47,11 @@ const NewTask = () => {
   const taskFormData = useSelector(TaskFormData);
   const parentTaskFormData = useSelector(ParentTaskFormData);
   const childTaskFormData = useSelector(ChildTaskFormData);
-  const otherData = useSelector(OtherData);
+  const otherTaskFormData = useSelector(TaskOtherData);
+  const ParentTasks = useSelector(parentTasks);
+  const ChildTasks = useSelector(childTasks);
+  const globalFormData = useSelector(globalData);
+  const { projects } = globalFormData;
 
   const parentTaskHandler = (e) => {
     setIsLogtime(false);
@@ -55,6 +63,12 @@ const NewTask = () => {
           isChildTask: false,
         },
         key: 'other',
+      })
+    );
+    dispatch(
+      SetFormMode({
+        ...otherTaskFormData.form_mode,
+        parent: 'create',
       })
     );
     onOpen();
@@ -72,8 +86,85 @@ const NewTask = () => {
         key: 'other',
       })
     );
+    dispatch(
+      SetFormMode({
+        ...otherTaskFormData.form_mode,
+        child: 'create',
+      })
+    );
     onOpen();
   };
+
+  const parentCardClickHandler = (task) => {
+    dispatch(
+      SetIntialParentTaskData({
+        data: task,
+      })
+    );
+    dispatch(
+      SetFormMode({
+        parent: 'edit',
+      })
+    );
+  };
+
+  const childCardClickHandler = (task) => {
+    dispatch(
+      SetIntialChildTaskData({
+        data: task,
+      })
+    );
+    dispatch(
+      SetFormMode({
+        child: 'edit',
+      })
+    );
+  };
+
+  const parentTaskList = ParentTasks.map((task) => {
+    const project = getProject(projects, task.project_id);
+    return (
+      <CustomCard
+        onClick={() => parentCardClickHandler(task)}
+        drawer_size="md"
+        onClickDispaly={
+          <TaskBasicDetailForm
+            parent_key={'parent_task'}
+            data={parentTaskFormData}
+          />
+        }
+        key={uuidv4()}
+      >
+        <Text fontWeight={'400'}> {task.title}</Text>
+        <Text fontWeight={'400'} fontSize={'14px'} color={'gray.500'}>
+          {project.name}
+        </Text>
+      </CustomCard>
+    );
+  });
+
+  const ChildTaskList = ChildTasks.map((task) => {
+    const project = getProject(projects, task.project_id);
+    return (
+      <CustomCard
+        onClick={() => childCardClickHandler(task)}
+        drawer_size="md"
+        onClickDispaly={
+          <TaskBasicDetailForm
+            parent_key={'child_task'}
+            data={parentTaskFormData}
+            size={'md'}
+          />
+        }
+        key={uuidv4()}
+      >
+        <Text fontWeight={'400'}> {task.title}</Text>
+        <Text fontWeight={'400'} fontSize={'14px'} color={'gray.500'}>
+          {project.name}
+        </Text>
+      </CustomCard>
+    );
+  });
 
   const logtimeHandler = () => {
     setIsLogtime(true);
@@ -113,8 +204,7 @@ const NewTask = () => {
                 </Button>
               </Box>
               <Flex justifyContent={'space-between'} flexWrap={'wrap'}>
-                <CustomCard />
-                <CustomCard />
+                {parentTaskList}
               </Flex>
             </AccordionPanel>
           </AccordionItem>
@@ -146,8 +236,7 @@ const NewTask = () => {
                 </Button>
               </Box>
               <Flex justifyContent={'space-between'} flexWrap={'wrap'}>
-                <CustomCard />
-                <CustomCard />
+                {ChildTaskList}
               </Flex>
             </AccordionPanel>
           </AccordionItem>
@@ -215,7 +304,9 @@ const NewTask = () => {
             <TaskBasicDetailForm
               parent_key={maintitle === 'parent' ? 'parent_task' : 'child_task'}
               data={
-                otherData.isParentTask ? parentTaskFormData : childTaskFormData
+                otherTaskFormData.isParentTask
+                  ? parentTaskFormData
+                  : childTaskFormData
               }
             />
           )}

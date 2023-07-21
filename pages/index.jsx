@@ -27,6 +27,7 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { fetchTaskInitialData } from '@/src/utility/helper';
 
 export default function Home(props) {
   const tasktitle = [

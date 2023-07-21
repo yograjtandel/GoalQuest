@@ -1,13 +1,25 @@
 import { Input } from '@chakra-ui/react';
-import { TagFormData, UpdateTagForm } from '@/src/store/tag/tag.slice';
+import {
+  SetFormMode,
+  TagFormData,
+  TagOtherData,
+  UpdateTagForm,
+} from '@/src/store/tag/tag.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { InputWrapper } from '../form';
 
 const Tag = () => {
   const FormData = useSelector(TagFormData);
   const dispatch = useDispatch();
+  const otherTaskFormData = useSelector(TagOtherData);
 
   const fieldChangeHandler = (e) => {
+    dispatch(
+      SetFormMode({
+        ...otherTaskFormData.form_mode,
+        stage: mode,
+      })
+    );
     dispatch(
       UpdateTagForm({
         value: e.target.value,
