@@ -7,53 +7,12 @@ import {
   setIntialParentTaskData,
   setIntialChildTaskData,
 } from './task.reducers';
-import { CreateTask, GetTasks, UpdateTask } from './task.action';
+import {
+  CreateTask,
+  GetTasks,
+} from './task.action';
+import { initialState } from './task.initial.state';
 
-const initialState = {
-  tasks: [],
-  parentTasks: [],
-  childTasks: [],
-  task: {
-    title: '',
-    project_id: '',
-    deadline: '',
-    description: '',
-    priority: '',
-    createdBy: '',
-    asignee: '',
-    stage: '',
-    tag: '',
-    parent_task: [],
-    child_task: [],
-  },
-  parent_task: {
-    title: '',
-    project_id: '',
-    deadline: '',
-    description: '',
-    priority: '',
-    createdBy: '',
-    asignee: '',
-    stage: '',
-    tag: '',
-  },
-  child_task: {
-    title: '',
-    project_id: '',
-    deadline: '',
-    description: '',
-    priority: '',
-    createdBy: '',
-    asignee: '',
-    stage: '',
-    tag: '',
-  },
-  other: {
-    isParentTask: false,
-    isChildTask: false,
-    form_mode: {},
-  },
-};
 const taskSlice = createSlice({
   name: 'task',
   initialState,

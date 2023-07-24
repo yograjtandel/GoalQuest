@@ -20,6 +20,9 @@ import {
   SetIntialTaskData,
   TaskOtherData,
 } from '@/src/store/task/task.slice';
+import { initialState } from '@/src/store/task/task.initial.state';
+import { initialState as projectInitialState } from '@/src/store/project/project.initial.state';
+import { SetIntialProjectData } from '@/src/store/project/project.slice';
 
 const Header = (props) => {
   const { stages } = props;
@@ -37,6 +40,13 @@ const Header = (props) => {
         [e.target.name]: 'create',
       })
     );
+
+    switch (e.target.name) {
+      case 'task':
+        dispatch(SetIntialTaskData({ data: initialState.task }));
+      case 'project':
+        dispatch(SetIntialProjectData({ data: projectInitialState.form }));
+    }
     setTitle(e.target.name);
     onOpen();
   };

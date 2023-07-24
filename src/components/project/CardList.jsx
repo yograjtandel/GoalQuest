@@ -30,6 +30,10 @@ export default function CardList(props) {
     );
   };
 
+  const drag = (e) => {
+    e.dataTransfer.setData('project_id', e.target.id);
+  };
+
   const CardList = group.projects.map((project) => {
     if (projects.length === 0) {
       return;
@@ -38,10 +42,13 @@ export default function CardList(props) {
 
     return (
       <CustomCard
+        draggable={true}
+        onDragStart={(e) => drag(e)}
         title={'project'}
         onClickDispaly={<NewProject mode="edit" />}
         onClick={() => cardClickHandler(project)}
-        key={uuidv4()}
+        key={project._id}
+        id={project._id}
       >
         <Text fontWeight={'400'}> {project.name}</Text>
       </CustomCard>

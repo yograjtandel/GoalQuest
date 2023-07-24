@@ -1,17 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import action from '@/src/utility/action';
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInitialData } from '@/src/store/global/global.action';
-import {
-  SetFormMode,
-  SetIntialTaskData,
-  SetTasks,
-  tasks,
-} from '@/src/store/task/task.slice';
+import { SetTasks, tasks } from '@/src/store/task/task.slice';
 import Kanban from '@/src/components/kanban/Kanban';
 import CardList from '@/src/components/task/CardList';
+import { GetTasks, UpdateTaskStage } from '@/src/store/task/task.action';
 
 const Task = (props) => {
   const { task_group } = props.pageProps;
@@ -26,16 +22,34 @@ const Task = (props) => {
     getData();
   }, []);
 
+  const drop = async (e) => {
+    let id = e.dataTransfer.getData('task_id');
+    let stage_id = e.currentTarget.name;
+    await dispatch(
+      UpdateTaskStage({
+        stage_id,
+        id,
+      })
+    );
+    await dispatch(GetTasks());
+  };
+
   const task_list = useMemo(() => {
     return Tasks.map((group) => (
-      <Kanban group={group} key={uuidv4()}>
+      <Kanban group={group} name={group._id} onDrop={drop} key={uuidv4()}>
         <CardList group={group} />
       </Kanban>
     ));
   }, [Tasks]);
 
   return (
-    <Box gap={4} overflowX={'auto'} display={'flex'} h={'calc(100vh - 70px)'}>
+    <Box
+      gap={4}
+      overflowX={'auto'}
+      display={'flex'}
+      h={'calc(100vh - 70px)'}
+      className="mycls"
+    >
       {task_list}
     </Box>
   );

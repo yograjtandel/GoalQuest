@@ -57,7 +57,6 @@ const CustomDrawer = (props) => {
   const dispatch = useDispatch();
 
   const getAction = () => {
-    debugger;
 
     switch (maintitle) {
       case 'task':
@@ -86,7 +85,6 @@ const CustomDrawer = (props) => {
           post_action: UpdateTask,
         };
       case 'project':
-        debugger;
         return {
           data: projectFormData,
           action:
@@ -96,7 +94,6 @@ const CustomDrawer = (props) => {
           post_action: GetProjects,
         };
       case 'stage':
-        debugger;
         return {
           data: stageFormData,
           action:
@@ -142,7 +139,6 @@ const CustomDrawer = (props) => {
     e.stopPropagation();
 
     const { action, data, post_action } = getAction();
-    debugger;
 
     await dispatch(action({ ...data, createdBy: session.data.id }));
     if (post_action) {

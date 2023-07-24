@@ -26,6 +26,18 @@ export const UpdateProject = createAsyncThunk(
   }
 );
 
+export const UpdateProjectStage = createAsyncThunk(
+  'global/UpdateProjectStage',
+  async ({ stage_id, id }) => {
+    const res = await action({
+      method: 'patch',
+      url: `/v1/project/${id}`,
+      data: { stage: stage_id },
+    });
+    return res.data;
+  }
+);
+
 export const GetProjects = createAsyncThunk(
   'global/GetProjects',
   async (data) => {

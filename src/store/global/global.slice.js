@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updateHeading } from './global.reducers';
+import { updateHeading, updateGlobalData } from './global.reducers';
 import { getInitialData } from './global.action';
 
 const initialState = {
@@ -10,15 +10,15 @@ const initialState = {
   tags: [],
   users: [],
   //   form_state: false,
-  active_record: false,
   initialDataFetched: false,
-  form_mode: {},
+  active_drop_zone: false,
 };
 const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
     updateHeading,
+    updateGlobalData,
   },
   extraReducers: (builder) => {
     builder.addCase(getInitialData.fulfilled, (state, action) => {
@@ -35,10 +35,11 @@ const globalSlice = createSlice({
 });
 
 export const header_heading = (state) => state.global.heading;
-// export const stages = (state) => state.global.stages;
-// export const managers = (state) => state.global.managers;
 export const globalData = (state) => state.global;
 
-export const { updateHeading: UpdateHeading } = globalSlice.actions;
+export const {
+  updateHeading: UpdateHeading,
+  updateGlobalData: UpdateGlobalData,
+} = globalSlice.actions;
 
 export default globalSlice.reducer;

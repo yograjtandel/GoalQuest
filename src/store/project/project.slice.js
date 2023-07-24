@@ -3,23 +3,11 @@ import {
   updateProjectForm,
   setFormMode,
   setProjects,
-  setIntialProjectData
+  setIntialProjectData,
 } from './project.reducers';
 import { CreateProject, GetProjects } from './project.action';
+import { initialState } from './project.initial.state';
 
-const initialState = {
-  projects: [],
-  form: {
-    name: '',
-    description: '',
-    manager: '',
-    stage: '',
-    deadline: '',
-  },
-  other: {
-    form_mode: {},
-  },
-};
 const projectSlice = createSlice({
   name: 'project',
   initialState,
@@ -27,7 +15,7 @@ const projectSlice = createSlice({
     updateProjectForm,
     setFormMode,
     setProjects,
-    setIntialProjectData
+    setIntialProjectData,
   },
   extraReducers: (builder) => {
     builder.addCase(CreateProject.fulfilled, (state, action) => {
@@ -47,7 +35,7 @@ export const {
   updateProjectForm: UpdateProjectForm,
   setFormMode: SetFormMode,
   setProjects: SetProjects,
-  setIntialProjectData: SetIntialProjectData
+  setIntialProjectData: SetIntialProjectData,
 } = projectSlice.actions;
 
 export default projectSlice.reducer;

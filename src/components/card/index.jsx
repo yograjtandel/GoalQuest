@@ -14,6 +14,7 @@ const CustomCard = (props) => {
     openDrawer,
     bg,
     title,
+    id,
     name,
     children,
     footer,
@@ -21,6 +22,8 @@ const CustomCard = (props) => {
     onClickDispaly,
     onClick,
     drawer_size,
+    draggable,
+    onDragStart,
   } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -39,10 +42,13 @@ const CustomCard = (props) => {
         mb={4}
         bg={undefined || bg}
         onClick={onclickCard}
+        onDragStart={(e) => onDragStart(e)}
         _hover={{
           cursor: 'pointer',
           shadow: 'lg',
         }}
+        draggable={draggable || false}
+        id={id}
       >
         <CardBody>{children}</CardBody>
       </Card>

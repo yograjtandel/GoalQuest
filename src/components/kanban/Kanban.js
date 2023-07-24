@@ -10,16 +10,16 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { getStage } from '@/src/utility/helper';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { globalData } from '@/src/store/global/global.slice';
 import KanbanWrapper from '../kanban/KanbanWrapper';
 
 export default function Kanban(props) {
-  const { group } = props;
+  const { group, name, onDrop } = props;
   const { stages } = useSelector(globalData);
 
   return (
-    <KanbanWrapper>
+    <KanbanWrapper id={name} onDrop={onDrop}>
       <Flex
         alignItems={'center'}
         justifyContent={'space-between'}
@@ -30,7 +30,7 @@ export default function Kanban(props) {
         <Text>
           {stages.length > 0 ? getStage(stages, group._id).title : ''}
         </Text>
-        <Menu>
+        {/*<Menu>
           <MenuButton as={Button} bg={'none'}>
             <AddIcon
               size={'14px'}
@@ -44,7 +44,7 @@ export default function Kanban(props) {
             <MenuItem>Delete</MenuItem>
             <MenuItem>Attend a Workshop</MenuItem>
           </MenuList>
-        </Menu>
+  </Menu>*/}
       </Flex>
       {props.children}
     </KanbanWrapper>

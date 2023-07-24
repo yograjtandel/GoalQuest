@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Flex, Text, Tooltip } from '@chakra-ui/react';
 import CustomCard from '@/src/components/card/index';
 import { NewTask } from '@/src/components/task';
@@ -26,6 +25,10 @@ export default function CardList(props) {
     );
   };
 
+  const drag = (e) => {
+    e.dataTransfer.setData('task_id', e.target.id);
+  };
+
   const CardList = group.tasks.map((task) => {
     if (projects.length === 0) {
       return;
@@ -35,10 +38,13 @@ export default function CardList(props) {
 
     return (
       <CustomCard
+        draggable={true}
+        onDragStart={(e) => drag(e)}
         title={'task'}
         onClickDispaly={<NewTask />}
         onClick={() => cardClickHandler(task)}
-        key={uuidv4()}
+        key={task.id}
+        id={task._id}
       >
         <Text fontWeight={'400'}> {task.title}</Text>
         <Text fontWeight={'400'} fontSize={'14px'} color={'gray.500'}>

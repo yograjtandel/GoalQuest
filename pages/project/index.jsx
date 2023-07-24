@@ -7,6 +7,7 @@ import { useEffect, useMemo } from 'react';
 import { SetProjects, projects } from '@/src/store/project/project.slice';
 import Kanban from '@/src/components/kanban/Kanban';
 import CardList from '@/src/components/project/CardList';
+import { UpdateProjectStage } from '@/src/store/project/project.action';
 
 const Project = (props) => {
   const { projects_grops } = props.pageProps;
@@ -20,10 +21,22 @@ const Project = (props) => {
     getData();
   }, []);
 
+  const drop = async (e) => {
+    let id = e.dataTransfer.getData('project_id');
+    let stage_id = e.currentTarget.name;
+    await dispatch(
+      UpdateProjectStage({
+        stage_id,
+        id,
+      })
+    );
+    await dispatch(GetProjects());
+  };
+
   const task_list = useMemo(() => {
     return Projects.map((group) => {
       return (
-        <Kanban group={group} key={uuidv4()}>
+        <Kanban group={group} name={group._id} key={uuidv4()} onDrop={drop}>
           <CardList group={group} />
         </Kanban>
       );

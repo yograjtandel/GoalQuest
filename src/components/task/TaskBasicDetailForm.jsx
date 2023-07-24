@@ -50,8 +50,6 @@ const TaskBasicDetailForm = (props) => {
       </option>
     )
   );
-  console.log(new Date(FormData.deadline).toDateString());
-  debugger;
   return (
     <>
       <InputWrapper title="Title">
