@@ -110,7 +110,8 @@ export default function Home() {
                       fontSize={'sm'}
                       size={'sm'}
                       colorScheme="teal"
-                      variant="link">
+                      variant="link"
+                    >
                       View Details
                     </Button>
                   </Box>
@@ -122,14 +123,16 @@ export default function Home() {
                 h={'100%'}
                 minH={'200px'}
                 maxH={'200px'}
-                p={2}>
+                p={2}
+              >
                 <>
                   <TableContainer
                     overflowY={'auto'}
                     h={'100%'}
                     maxH={'200px'}
                     minH={'200px'}
-                    py={'2'}>
+                    py={'2'}
+                  >
                     <Table>
                       <Thead>
                         <Tr>
@@ -146,7 +149,8 @@ export default function Home() {
                             isNumeric
                             fontWeight={'normal'}
                             p={2}
-                            fontSize={'sm'}>
+                            fontSize={'sm'}
+                          >
                             25.4
                           </Td>
                         </Tr>
@@ -300,14 +304,13 @@ export default function Home() {
               </CardBody>
             </Card>
           </GridItem> */}
-            <GridItem>
-            <Card    maxH={'200px'}
-                    minH={'200px'} overflow={'hidden'}>
+          <GridItem>
+            <Card maxH={'200px'} minH={'200px'} overflow={'hidden'}>
               <CardHeader display={'flex'} flexDirection={'column'}>
                 <Heading as="h4" size="md" mb={4}>
                   To Do
                 </Heading>
-                <Flex >
+                <Flex>
                   <Input
                     m={0}
                     value={Todo}
@@ -353,7 +356,9 @@ export default function Home() {
               </CardBody>
             </Card>
           </GridItem>
-          <GridItem><Multiselect/> </GridItem>
+          <GridItem>
+            <Multiselect />{' '}
+          </GridItem>
           <GridItem />
         </Grid>
       </Box>
