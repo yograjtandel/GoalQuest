@@ -46,6 +46,14 @@ export const GetTasks = createAsyncThunk('global/GetTasks', async (data) => {
   return res.data;
 });
 
+export const getLogtime = createAsyncThunk('global/getLogtime', async () => {
+  const res = await action({
+    method: 'get',
+    url: '/v1/timelog',
+  });
+  return res.data;
+});
+
 export const CreateLogtime = createAsyncThunk(
   'global/CreateLogtime',
   async (data) => {

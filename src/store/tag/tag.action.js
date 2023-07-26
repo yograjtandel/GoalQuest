@@ -12,3 +12,11 @@ export const CreateTag = createAsyncThunk(
     return res.data.results;
   }
 );
+
+export const GetTages = createAsyncThunk('global/GetTages', async (data) => {
+    const res = await action({
+      method: 'get',
+      url: '/v1/tag?limit=0',
+    });
+    return res.data.results;
+  });

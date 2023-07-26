@@ -24,6 +24,7 @@ const CustomCard = (props) => {
     drawer_size,
     draggable,
     onDragStart,
+    height,
   } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -38,7 +39,7 @@ const CustomCard = (props) => {
     <>
       <Card
         w={'100%'}
-        h={'100%'}
+        h={height || '100%'}
         mb={4}
         bg={undefined || bg}
         onClick={onclickCard}

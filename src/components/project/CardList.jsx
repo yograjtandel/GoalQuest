@@ -49,6 +49,7 @@ export default function CardList(props) {
         onClick={() => cardClickHandler(project)}
         key={project._id}
         id={project._id}
+        height={'auto'}
       >
         <Text fontWeight={'400'}> {project.name}</Text>
       </CustomCard>

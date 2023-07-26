@@ -18,5 +18,5 @@ export const GetRoles = createAsyncThunk('global/GetRoles', async (data) => {
     method: 'get',
     url: '/v1/role?limit=0',
   });
-  return res.data;
+  return res.data.results;
 });

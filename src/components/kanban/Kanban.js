@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  Box,
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { getStage } from '@/src/utility/helper';
@@ -17,9 +18,12 @@ import KanbanWrapper from '../kanban/KanbanWrapper';
 export default function Kanban(props) {
   const { group, name, onDrop } = props;
   const { stages } = useSelector(globalData);
-
+  const drop = async (e) => {
+    e.preventDefault();
+    await onDrop(e);
+  };
   return (
-    <KanbanWrapper id={name} onDrop={onDrop}>
+    <KanbanWrapper name={name}>
       <Flex
         alignItems={'center'}
         justifyContent={'space-between'}
@@ -27,9 +31,7 @@ export default function Kanban(props) {
         px={4}
         pb={4}
       >
-        <Text>
-          {stages.length > 0 ? getStage(stages, group._id).title : ''}
-        </Text>
+        <Text>{stages.length > 0 ? getStage(stages, name).title : ''}</Text>
         {/*<Menu>
           <MenuButton as={Button} bg={'none'}>
             <AddIcon
@@ -46,7 +48,57 @@ export default function Kanban(props) {
           </MenuList>
   </Menu>*/}
       </Flex>
-      {props.children}
+      <Box
+        w={'100%'}
+        h={'100%'}
+        minH={'calc(100vh - 125px)'}
+        id={`${name}`}
+        className={`dropzone-${name}`}
+        p={3}
+        boxShadow="xl"
+        border={'1px solid'}
+        borderColor={'gray.300'}
+        rounded="md"
+        onDrop={(e) => drop(e)}
+        onDragOver={(e) => {
+          e.preventDefault();
+        }}
+        onDragEnter={(e) => {
+          // console.log(e.currentTarget.contains(e.target));
+          // console.log(e.currentTarget);
+          // console.log(e.target);
+          console.log('===================enter');
+          if (e.currentTarget.classList.contains(`dropzone-${name}`)) {
+            e.currentTarget.classList.add('active-drop-zone');
+          }
+        }}
+        onDragLeave={function (e) {
+          const parent = e.target.closest(`#dropzone-${name}`);
+          console.log(e.target);
+          // console.log(e.currentTarget.contains(e.target));
+          console.log(e.currentTarget);
+          //   console.log(e.currentTarget.children[0]);
+          //   console.log(e.currentTarget.contains(e.target));
+          console.log('===================leave');
+
+          //   let isRemoveClass = true;
+          //   if (
+          //     e.target !== e.currentTarget &&
+          //     e.currentTarget.contains(e.target)
+          //   ) {
+          //     isRemoveClass = false;
+          //   }
+          if (
+            // e.target === e.currentTarget &&
+            e.target.classList.contains(`dropzone-${name}`)
+            // && !e.currentTarget.childNodes.contains(e.target)
+          ) {
+            e.currentTarget.classList.remove('active-drop-zone');
+          }
+        }}
+      >
+        {props.children}
+      </Box>
     </KanbanWrapper>
   );
 }

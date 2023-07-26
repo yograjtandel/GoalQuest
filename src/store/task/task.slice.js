@@ -7,10 +7,7 @@ import {
   setIntialParentTaskData,
   setIntialChildTaskData,
 } from './task.reducers';
-import {
-  CreateTask,
-  GetTasks,
-} from './task.action';
+import { CreateTask, GetTasks, CreateLogtime, getLogtime } from './task.action';
 import { initialState } from './task.initial.state';
 
 const taskSlice = createSlice({
@@ -42,10 +39,13 @@ const taskSlice = createSlice({
       state.tasks = action.payload;
     });
     builder.addCase(CreateLogtime.fulfilled, (state, action) => {
-        state.timeLogs = [...state.timeLogs, action.payload];
-        state.task.time_log_ids = [...state.task.time_log_ids, action.payload.id];
-      });
-    
+      state.time_log = initialState.time_log;
+      state.timeLogs = [...state.timeLogs, action.payload];
+      state.task.time_log_ids = [...state.task.time_log_ids, action.payload.id];
+    });
+    builder.addCase(getLogtime.fulfilled, (state, action) => {
+      state.timeLogs = action.payload;
+    });
   },
 });
 
@@ -57,6 +57,8 @@ export const tasks = (state) => state.task.tasks;
 export const parentTasks = (state) => state.task.parentTasks;
 export const childTasks = (state) => state.task.childTasks;
 export const timeLogFormData = (state) => state.task.time_log;
+export const timeLogs = (state) => state.task.timeLogs;
+
 
 export const {
   updateTaskForm: UpdateTaskForm,

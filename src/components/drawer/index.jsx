@@ -93,7 +93,6 @@ const CustomDrawer = (props) => {
           post_action: UpdateTask,
         };
       case 'logtime':
-        debugger;
         return {
           data: { data: JSON.stringify(TimeLogFormData) },
           action:

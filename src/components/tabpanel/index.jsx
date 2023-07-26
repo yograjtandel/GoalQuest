@@ -5,11 +5,16 @@ import { GetStages } from '@/src/store/stage/stage.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { Stages } from '@/src/store/stage/stage.slice';
 import { useEffect, useState } from 'react';
-
+import { GetTages } from '@/src/store/tag/tag.action';
+import { Tags } from '@/src/store/tag/tag.slice';
+import { Roles } from '@/src/store/role/role.slice';
+import { GetRoles } from '@/src/store/role/role.action';
 
 const customtab = () => {
   const dispatch = useDispatch();
   const StageData = useSelector(Stages);
+  const TagData = useSelector(Tags);
+  const RoleData = useSelector(Roles);
   const [tabIndex, setTabIndex] = useState();
   useEffect(() => {
     handleTabsChange(0);
@@ -25,17 +30,17 @@ const customtab = () => {
     },
     {
       title: 'Tags',
-      getAction: GetStages,
+      getAction: GetTages,
       index: 1,
-      data: StageData,
-      heading: { title: 'Title', display_sequence: 'Sequence' },
+      data: TagData,
+      heading: { title: 'Title' },
     },
     {
       title: 'Roles',
-      getAction: GetStages,
+      getAction: GetRoles,
       index: 2,
-      data: StageData,
-      heading: { title: 'Title', display_sequence: 'Sequence' },
+      data: RoleData,
+      heading: { name: 'Name' },
     },
     {
       title: 'User',

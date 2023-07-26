@@ -36,7 +36,6 @@ const LogTime = (props) => {
       {user.name}
     </option>
   ));
-
   return (
     <>
       <InputWrapper title="Emp">
@@ -71,8 +70,8 @@ const LogTime = (props) => {
       <InputWrapper title="Note">
         <Textarea
           placeholder="Here is a sample placeholder"
-          name="Note"
-          value={FormData.Note}
+          name="note"
+          value={FormData.note}
           onChange={(e) => fieldChangeHandler(e)}
         />
       </InputWrapper>

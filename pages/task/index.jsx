@@ -8,10 +8,12 @@ import { SetTasks, tasks } from '@/src/store/task/task.slice';
 import Kanban from '@/src/components/kanban/Kanban';
 import CardList from '@/src/components/task/CardList';
 import { GetTasks, UpdateTaskStage } from '@/src/store/task/task.action';
+import { globalData } from '@/src/store/global/global.slice';
 
 const Task = (props) => {
   const { task_group } = props.pageProps;
   const Tasks = useSelector(tasks);
+  const { stages } = useSelector(globalData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ const Task = (props) => {
 
   const drop = async (e) => {
     let id = e.dataTransfer.getData('task_id');
-    let stage_id = e.currentTarget.name;
+    let stage_id = e.currentTarget.id;
     await dispatch(
       UpdateTaskStage({
         stage_id,
@@ -45,10 +47,11 @@ const Task = (props) => {
   return (
     <Box
       gap={4}
-      overflowX={'auto'}
+      overflowX={'hidden'}
       display={'flex'}
-      h={'calc(100vh - 70px)'}
-      className="mycls"
+      minH={'calc(100vh - 70px)'}
+      maxH={'calc(100vh - 70px)'}
+      h="100%"
     >
       {task_list}
     </Box>

@@ -2,6 +2,7 @@ export const initialState = {
   tasks: [],
   parentTasks: [],
   childTasks: [],
+  timeLogs: [],
   task: {
     title: '',
     project_id: '',
@@ -14,6 +15,7 @@ export const initialState = {
     tag: '',
     parent_task: [],
     child_task: [],
+    time_log_ids: [],
   },
   parent_task: {
     title: '',
@@ -36,6 +38,12 @@ export const initialState = {
     asignee: '',
     stage: '',
     tag: '',
+  },
+  time_log: {
+    employee: '',
+    houres: '',
+    date: new Date(),
+    billable: false,
   },
   other: {
     isParentTask: false,

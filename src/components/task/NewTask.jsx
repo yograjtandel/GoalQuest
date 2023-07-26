@@ -35,6 +35,7 @@ import {
   parentTasks,
   TaskOtherData,
   timeLogFormData,
+  timeLogs,
 } from '@/src/store/task/task.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProject } from '@/src/utility/helper';
@@ -53,6 +54,8 @@ const NewTask = () => {
   const ChildTasks = useSelector(childTasks);
   const TimeLogFormData = useSelector(timeLogFormData);
   const globalFormData = useSelector(globalData);
+  const TimeLogs = useSelector(timeLogs);
+
   const { projects } = globalFormData;
 
   const parentTaskHandler = (e) => {
@@ -168,6 +171,16 @@ const NewTask = () => {
     );
   });
 
+  const time_log_list = TimeLogs.map((log) => (
+    <Tr key={log._id}>
+      <Td>{log.employee}</Td>
+      <Td>{log.houres}</Td>
+      <Td>{log.date}</Td>
+      <Td>{log.billable}</Td>
+      <Td>25.4</Td>
+    </Tr>
+  ));
+
   const logtimeHandler = () => {
     setIsLogtime(true);
     setTitle('logtime');
@@ -275,26 +288,11 @@ const NewTask = () => {
                     <Tr>
                       <Th>Emp</Th>
                       <Th>Time</Th>
+                      <Th>date</Th>
                       <Th>Billable</Th>
                     </Tr>
                   </Thead>
-                  <Tbody>
-                    <Tr>
-                      <Td>inches</Td>
-                      <Td>millimetres (mm)</Td>
-                      <Td>25.4</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>feet</Td>
-                      <Td>centimetres (cm)</Td>
-                      <Td>30.48</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>yards</Td>
-                      <Td>metres (m)</Td>
-                      <Td>0.91444</Td>
-                    </Tr>
-                  </Tbody>
+                  <Tbody>{time_log_list}</Tbody>
                 </Table>
               </TableContainer>
             </AccordionPanel>

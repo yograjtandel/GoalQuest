@@ -45,6 +45,8 @@ export default function CardList(props) {
         onClick={() => cardClickHandler(task)}
         key={task.id}
         id={task._id}
+        height={'auto'}
+        border={'1px solid '}
       >
         <Text fontWeight={'400'}> {task.title}</Text>
         <Text fontWeight={'400'} fontSize={'14px'} color={'gray.500'}>
