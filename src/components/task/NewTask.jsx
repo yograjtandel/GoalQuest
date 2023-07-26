@@ -34,6 +34,7 @@ import {
   childTasks,
   parentTasks,
   TaskOtherData,
+  timeLogFormData,
 } from '@/src/store/task/task.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProject } from '@/src/utility/helper';
@@ -50,6 +51,7 @@ const NewTask = () => {
   const otherTaskFormData = useSelector(TaskOtherData);
   const ParentTasks = useSelector(parentTasks);
   const ChildTasks = useSelector(childTasks);
+  const TimeLogFormData = useSelector(timeLogFormData);
   const globalFormData = useSelector(globalData);
   const { projects } = globalFormData;
 
@@ -168,6 +170,13 @@ const NewTask = () => {
 
   const logtimeHandler = () => {
     setIsLogtime(true);
+    setTitle('logtime');
+    dispatch(
+      SetFormMode({
+        ...otherTaskFormData.form_mode,
+        logtime: 'create',
+      })
+    );
     onOpen();
   };
 
@@ -310,7 +319,9 @@ const NewTask = () => {
               }
             />
           )}
-          {isLogtime && <LogTime />}
+          {isLogtime && (
+            <LogTime data={TimeLogFormData} parent_key="time_log" />
+          )}
         </CustomDrawer>
       </Box>
     </>

@@ -41,6 +41,11 @@ const taskSlice = createSlice({
     builder.addCase(GetTasks.fulfilled, (state, action) => {
       state.tasks = action.payload;
     });
+    builder.addCase(CreateLogtime.fulfilled, (state, action) => {
+        state.timeLogs = [...state.timeLogs, action.payload];
+        state.task.time_log_ids = [...state.task.time_log_ids, action.payload.id];
+      });
+    
   },
 });
 
@@ -51,6 +56,8 @@ export const TaskOtherData = (state) => state.task.other;
 export const tasks = (state) => state.task.tasks;
 export const parentTasks = (state) => state.task.parentTasks;
 export const childTasks = (state) => state.task.childTasks;
+export const timeLogFormData = (state) => state.task.time_log;
+
 export const {
   updateTaskForm: UpdateTaskForm,
   setIntialTaskData: SetIntialTaskData,

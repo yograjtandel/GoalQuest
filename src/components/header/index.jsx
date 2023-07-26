@@ -31,7 +31,6 @@ const Header = (props) => {
   const HeaderHeading = useSelector(header_heading);
   const otherTaskFormData = useSelector(TaskOtherData);
   const dispatch = useDispatch();
-  //   console.log('==========');
 
   const onMenuClickHAndler = (e) => {
     dispatch(

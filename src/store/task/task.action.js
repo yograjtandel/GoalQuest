@@ -45,3 +45,28 @@ export const GetTasks = createAsyncThunk('global/GetTasks', async (data) => {
   });
   return res.data;
 });
+
+export const CreateLogtime = createAsyncThunk(
+  'global/CreateLogtime',
+  async (data) => {
+    const res = await action({
+      method: 'post',
+      url: '/v1/timelog',
+      data,
+    });
+    return res.data;
+  }
+);
+
+export const UpdateTimeLog = createAsyncThunk(
+  'global/UpdateTimeLog',
+  async (data, { getState }) => {
+    const state = getState();
+    const res = await action({
+      method: 'patch',
+      url: `/v1/timelog/${state.task.time_log._id}`,
+      data: state.task.time_log,
+    });
+    return res.data;
+  }
+);

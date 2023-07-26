@@ -4,10 +4,17 @@ import Customtable from '../table';
 import { GetStages } from '@/src/store/stage/stage.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { Stages } from '@/src/store/stage/stage.slice';
+import { useEffect, useState } from 'react';
+
 
 const customtab = () => {
   const dispatch = useDispatch();
   const StageData = useSelector(Stages);
+  const [tabIndex, setTabIndex] = useState();
+  useEffect(() => {
+    handleTabsChange(0);
+  }, []);
+
   const tabs = [
     {
       title: 'Stage',
@@ -38,20 +45,19 @@ const customtab = () => {
       heading: { title: 'Title', display_sequence: 'Sequence' },
     },
   ];
-  //   const tabledata = [
-  //     { title: 'State' },
-  //     { title: 'Tags' },
-  //     { title: 'Roles' },
-  //     { title: 'User' },
-  //   ];
+
+  const handleTabsChange = async (index) => {
+    await dispatch(tabs.find((tab) => tab.index === index).getAction());
+    setTabIndex(index);
+  };
+
   return (
     <Tabs
       orientation="vertical"
       h={'100%'}
       w={'100%'}
-      onChange={(index) => {
-        dispatch(tabs.find((tab) => tab.index === index).getAction());
-      }}
+      value={tabIndex}
+      onChange={handleTabsChange}
     >
       <TabList>
         {tabs.map((tasktitle) => (

@@ -83,7 +83,7 @@ const setting = (props) => {
 
 export default setting;
 
-export const getServerSideProps = async () => {
+export const GetStaticProps = async () => {
   let rightsDoc = [];
   try {
     const res = await action({

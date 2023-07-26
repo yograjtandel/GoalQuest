@@ -33,9 +33,16 @@ import {
   SetFormMode,
   TaskFormData,
   TaskOtherData,
+  timeLogFormData,
   UpdateTaskForm,
 } from '@/src/store/task/task.slice';
-import { CreateTask, GetTasks, UpdateTask } from '@/src/store/task/task.action';
+import {
+  CreateLogtime,
+  CreateTask,
+  GetTasks,
+  UpdateTask,
+  UpdateTimeLog,
+} from '@/src/store/task/task.action';
 
 const CustomDrawer = (props) => {
   const { maintitle, isOpen, onClose, btnRef, size, children } = props;
@@ -43,6 +50,7 @@ const CustomDrawer = (props) => {
   const taskFormData = useSelector(TaskFormData);
   const parentTaskFormData = useSelector(ParentTaskFormData);
   const childTaskFormData = useSelector(ChildTaskFormData);
+  const TimeLogFormData = useSelector(timeLogFormData);
   const projectFormData = useSelector(ProjectFormData);
   const stageFormData = useSelector(StageFormData);
   const roleFormData = useSelector(RoleFormData);
@@ -83,6 +91,15 @@ const CustomDrawer = (props) => {
               ? CreateTask
               : UpdateTask,
           post_action: UpdateTask,
+        };
+      case 'logtime':
+        debugger;
+        return {
+          data: { data: JSON.stringify(TimeLogFormData) },
+          action:
+            taskOtherData.form_mode.logtime === 'create'
+              ? CreateLogtime
+              : UpdateTimeLog,
         };
       case 'project':
         return {
