@@ -6,11 +6,11 @@ export const initialState = {
   task: {
     title: '',
     project_id: '',
-    deadline: new Date(),
+    deadline: new Date().toISOString().split('T')[0],
     description: '',
     priority: '',
     createdBy: '',
-    asignee: '',
+    asignee: [],
     stage: '',
     tag: '',
     parent_task: [],
@@ -20,7 +20,7 @@ export const initialState = {
   parent_task: {
     title: '',
     project_id: '',
-    deadline: new Date(),
+    deadline: new Date().toISOString().split('T')[0],
     description: '',
     priority: '',
     createdBy: '',
@@ -31,7 +31,7 @@ export const initialState = {
   child_task: {
     title: '',
     project_id: '',
-    deadline: new Date(),
+    deadline: new Date().toISOString().split('T')[0],
     description: '',
     priority: '',
     createdBy: '',
@@ -42,7 +42,7 @@ export const initialState = {
   time_log: {
     employee: '',
     houres: '',
-    date: new Date(),
+    date: new Date().toISOString().split('T')[0],
     billable: false,
   },
   other: {

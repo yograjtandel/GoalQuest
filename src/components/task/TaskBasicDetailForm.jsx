@@ -12,9 +12,14 @@ const TaskBasicDetailForm = (props) => {
   const { projects, tags, users, stages } = globalFormData;
   const dispatch = useDispatch();
   const fieldChangeHandler = (e) => {
+    let value =
+      e.target.type === 'date'
+        ? new Date(e.target.value).toISOString().split('T')[0]
+        : e.target.value;
+debugger
     dispatch(
       UpdateTaskForm({
-        value: e.target.value,
+        value: value,
         key: e.target.name,
         parent_key,
       })
