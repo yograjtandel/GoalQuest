@@ -15,6 +15,7 @@ import Notification from '@/src/components/ui/Notification';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getInitialData } from '@/src/store/global/global.action';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 export default function App({ Component, session, ...pageProps }) {
   const [isWeb, setIsWeb] = useState(false);
@@ -26,7 +27,8 @@ export default function App({ Component, session, ...pageProps }) {
     }
   }, []);
   return (
-    <SessionProvider session={session}>
+    // <SessionProvider session={session}>
+    <UserProvider>
       <NotificationContextProvider>
         <ChakraProvider theme={Theme}>
           {!isWeb && (
@@ -71,6 +73,7 @@ export default function App({ Component, session, ...pageProps }) {
           {isWeb && <Component {...pageProps} />}
         </ChakraProvider>
       </NotificationContextProvider>
-    </SessionProvider>
+    </UserProvider>
+    // </SessionProvider>
   );
 }

@@ -61,11 +61,10 @@ const CustomDrawer = (props) => {
   const tagOtherData = useSelector(TagOtherData);
   const projectOtherData = useSelector(ProjectOtherData);
 
-  const session = useSession();
+  // const session = useSession();
   const dispatch = useDispatch();
 
   const getAction = () => {
-
     switch (maintitle) {
       case 'task':
         return {
@@ -156,7 +155,7 @@ const CustomDrawer = (props) => {
 
     const { action, data, post_action } = getAction();
 
-    await dispatch(action({ ...data, createdBy: session.data.id }));
+    // await dispatch(action({ ...data, createdBy: session.data.id }));
     if (post_action) {
       dispatch(post_action());
     }

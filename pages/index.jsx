@@ -12,9 +12,6 @@ import {
   Th,
   Thead,
   Tr,
-} from '@chakra-ui/react';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import {
   Box,
   Input,
   Checkbox,
@@ -25,9 +22,21 @@ import {
   IconButton,
   List,
 } from '@chakra-ui/react';
+// import { useSession, signIn, signOut } from 'next-auth/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { fetchTaskInitialData } from '@/src/utility/helper';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import axios from 'axios';
+
+const logToken = async () => {
+  const {
+    data: { accessToken },
+  } = await axios.get('/api/auth/token');
+  console.log('accessToken', accessToken);
+
+  // console.log('accessToken:', accessToken);
+};
 
 export default function Home(props) {
   const tasktitle = [
@@ -49,6 +58,17 @@ export default function Home(props) {
   const { Action, Response, Error } = useAction();
   const [Todo, setTodo] = useState('');
   const [data, setState] = useState([]);
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) return <div>Loading User Session...</div>;
+  if (error) return <div>{error.message}</div>;
+
+  if (user) {
+    setTimeout(() => {
+      logToken();
+    }, 100);
+  }
+
   const clickHandler = () => {
     setState((prev) => [...prev, Todo]);
     setTodo('');
@@ -82,15 +102,15 @@ export default function Home(props) {
       },
     });
   }
-  const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <Button onClick={() => signOut()}>Sign out</Button>
-      </>
-    );
-  }
+  // const { data: session } = useSession();
+  // if (session) {
+  //   return (
+  //     <>
+  //       Signed in as {session.user.email} <br />
+  //       <Button onClick={() => signOut()}>Sign out</Button>
+  //     </>
+  //   );
+  // }
 
   return (
     <>
@@ -104,7 +124,9 @@ export default function Home(props) {
         rounded="md"
       >
         Not signed in <br />
-        <Button onClick={() => signIn()}>Sign in</Button>
+        <Button onClick={(e) => e.preventDefault()}>
+          <a href="/api/auth/login">Login</a>
+        </Button>
         <Button
           onClick={() =>
             signIn(
@@ -116,6 +138,27 @@ export default function Home(props) {
         >
           Sign up
         </Button>
+        <div style={{ float: 'right' }}>
+          {user ? (
+            <div>
+              <img src={user.picture} alt={user.name} title={user.nickname} />
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  logToken();
+                }}
+              >
+                GetToken
+              </a>
+              <h2>NickName: {user.nickname}</h2>
+              <p>Email: {user.email}</p>
+              <a href="/api/auth/logout">Logout</a>
+            </div>
+          ) : (
+            <a href="/api/auth/login">Login</a>
+          )}
+        </div>
         <Flex w={'100%'} overflowX={'hidden'} p={4}>
           <Box
             w={'100%'}
