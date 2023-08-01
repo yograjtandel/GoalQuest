@@ -14,24 +14,23 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
   height: 4px;
-  cursor:pointer;
-  background-color: rgba(0, 0, 0, 0.123)
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.123);
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.123)
+  background-color: rgba(0, 0, 0, 0.123);
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.137)
+  background-color: rgba(0, 0, 0, 0.137);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 0, 0, 0.150);
-  
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 .primary-color {
@@ -40,4 +39,8 @@ body {
 
 Button{
   cursor: pointer;
+}
+
+.active-drop-zone {
+  background-color: var(--chakra-colors-gray-300);
 }

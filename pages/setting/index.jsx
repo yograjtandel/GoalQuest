@@ -18,15 +18,21 @@ import User from '@/src/components/setting/User';
 import Customtab from '@/src/components/tabpanel';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import CustomDrawer from '@/src/components/drawer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getInitialData } from '@/src/store/global/global.action';
 
 const setting = (props) => {
   const { rights } = props.pageProps;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState('');
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getInitialData());
+  }, []);
+
   const onMenuClickHAndler = (e) => {
-    debugger;
     setTitle(e.target.name);
     onOpen();
   };
@@ -66,10 +72,10 @@ const setting = (props) => {
         onClose={onClose}
         maintitle={title}
       >
-        {title === 'stage' && <Stage />}
-        {title === 'tag' && <Tag />}
-        {title === 'role' && <Role rights={rights} />}
-        {title === 'user' && <User />}
+        {title === 'stage' && <Stage mode="create" />}
+        {title === 'tag' && <Tag mode="create" />}
+        {title === 'role' && <Role rights={rights} mode="create" />}
+        {title === 'user' && <User mode="create" />}
       </CustomDrawer>
     </Box>
   );
@@ -77,7 +83,7 @@ const setting = (props) => {
 
 export default setting;
 
-export const getServerSideProps = async () => {
+export const GetStaticProps = async () => {
   let rightsDoc = [];
   try {
     const res = await action({

@@ -14,15 +14,38 @@ import { useState } from 'react';
 import { AddIcon } from '@chakra-ui/icons';
 import { NewProject } from '../project';
 import { header_heading } from '@/src/store/global/global.slice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  SetFormMode,
+  SetIntialTaskData,
+  TaskOtherData,
+} from '@/src/store/task/task.slice';
+import { initialState } from '@/src/store/task/task.initial.state';
+import { initialState as projectInitialState } from '@/src/store/project/project.initial.state';
+import { SetIntialProjectData } from '@/src/store/project/project.slice';
 
 const Header = (props) => {
   const { stages } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState('');
   const HeaderHeading = useSelector(header_heading);
+  const otherTaskFormData = useSelector(TaskOtherData);
+  const dispatch = useDispatch();
 
   const onMenuClickHAndler = (e) => {
+    dispatch(
+      SetFormMode({
+        ...otherTaskFormData.form_mode,
+        [e.target.name]: 'create',
+      })
+    );
+
+    switch (e.target.name) {
+      case 'task':
+        dispatch(SetIntialTaskData({ data: initialState.task }));
+      case 'project':
+        dispatch(SetIntialProjectData({ data: projectInitialState.form }));
+    }
     setTitle(e.target.name);
     onOpen();
   };
@@ -85,7 +108,7 @@ const Header = (props) => {
         maintitle={title}
       >
         {title === 'task' && <NewTask />}
-        {title === 'project' && <NewProject stages={stages} />}
+        {title === 'project' && <NewProject stages={stages} mode="create" />}
       </CustomDrawer>
     </>
   );

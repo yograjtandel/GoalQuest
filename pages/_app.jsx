@@ -14,10 +14,12 @@ import Notification from '@/src/components/ui/Notification';
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { getInitialData } from '@/src/store/global/global.action';
 
 export default function App({ Component, session, ...pageProps }) {
   const [isWeb, setIsWeb] = useState(false);
   const router = useRouter();
+
   useEffect(() => {
     if (router.pathname.startsWith('/web')) {
       setIsWeb(true);
@@ -51,7 +53,12 @@ export default function App({ Component, session, ...pageProps }) {
                   >
                     <Sidebar display="flex" justifyContent="start" />
                   </GridItem>
-                  <GridItem area={'main'} h={'100%'} overflow={'hidden'}>
+                  <GridItem
+                    area={'main'}
+                    h={'100%'}
+                    w={'100%'}
+                    overflow={'hidden'}
+                  >
                     <Header />
                     <Box p={2}>
                       <Component {...pageProps} />

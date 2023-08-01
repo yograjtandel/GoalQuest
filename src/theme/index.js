@@ -18,6 +18,9 @@ const Theme = extendTheme({
     fontcolor: {
       400: '#5a6065',
     },
+    gray: {
+      300: '#CBD5E0',
+    },
   },
   fonts: {
     heading: `'Open Sans'`,

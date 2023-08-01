@@ -1,44 +1,60 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Input, Select, Textarea } from '@chakra-ui/react';
 import { InputWrapper } from '../form';
-import { TaskFormData, UpdateTaskForm } from '@/src/store/task/task.slice';
+import { UpdateTaskForm } from '@/src/store/task/task.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { globalData } from '@/src/store/global/global.slice';
 
-const TaskBasicDetailForm = () => {
-  const FormData = useSelector(TaskFormData);
+const TaskBasicDetailForm = (props) => {
+  const { data: FormData, parent_key } = props;
+
   const globalFormData = useSelector(globalData);
   const { projects, tags, users, stages } = globalFormData;
-
   const dispatch = useDispatch();
   const fieldChangeHandler = (e) => {
-    debugger;
+    let value =
+      e.target.type === 'date'
+        ? new Date(e.target.value).toISOString().split('T')[0]
+        : e.target.value;
+debugger
     dispatch(
       UpdateTaskForm({
-        value: e.target.value,
+        value: value,
         key: e.target.name,
+        parent_key,
       })
     );
   };
 
   const projectOptions = projects.map((project) => (
-    <option value={project.id}>{project.name}</option>
+    <option value={project.id} key={uuidv4()}>
+      {project.name}
+    </option>
   ));
 
   const tagsOptions = tags.map((tag) => (
-    <option value={tag.id}>{tag.title}</option>
+    <option value={tag.id} key={uuidv4()}>
+      {tag.title}
+    </option>
   ));
   const usersOptions = users.map((user) => (
-    <option value={user.id}>{user.name}</option>
+    <option value={user.id} key={uuidv4()}>
+      {user.name}
+    </option>
   ));
-  debugger;
   const stagesOptions = stages.map((stage) => (
-    <option value={stage.id}>{stage.title}</option>
+    <option value={stage.id} key={uuidv4()}>
+      {stage.title}
+    </option>
   ));
 
   const priorityOptions = ['low', 'medium', 'high', 'urgent'].map(
-    (priority) => <option value={priority}>{priority}</option>
+    (priority) => (
+      <option value={priority} key={uuidv4()}>
+        {priority}
+      </option>
+    )
   );
-
   return (
     <>
       <InputWrapper title="Title">
@@ -63,7 +79,9 @@ const TaskBasicDetailForm = () => {
         <Input
           type="Date"
           name="deadline"
-          value={FormData.deadline}
+          //     value='1994-10-04'
+          // //   value="2023-07-25"
+          value={new Date(FormData.deadline).toISOString().split('T')[0]}
           onChange={(e) => fieldChangeHandler(e)}
         />
       </InputWrapper>
@@ -71,7 +89,7 @@ const TaskBasicDetailForm = () => {
         <Select
           placeholder="Select option"
           name="asignee"
-          value={FormData.asignee}
+          value={FormData.asignee[0]}
           onChange={(e) => fieldChangeHandler(e)}
         >
           {usersOptions}
