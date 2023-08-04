@@ -54,34 +54,6 @@ export default function Home(props) {
     setTodo('');
   };
 
-  async function signup() {
-    const auth0Response = await fetch(
-      `https://dev-c0a3javl4d5ua32y.us.auth0.com/dbconnections/signup`,
-      {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          client_id: '4z8QNi1ATEjLsRiK5XJORcO2xif7ffmn',
-          connection: 'Username-Password-Authentication',
-          email: 'new@new.com',
-          password: 'New@1234',
-        }),
-      }
-    );
-    const body = await auth0Response.json();
-
-    await Action({
-      method: 'post',
-      url: '/v1/user/',
-      data: {
-        email: 'new@new.com',
-        role: '6497ca904ff8285535f7711c',
-        name: 'new',
-      },
-    });
-  }
   const { data: session } = useSession();
   if (session) {
     return (

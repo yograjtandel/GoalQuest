@@ -22,7 +22,7 @@ const Links = [
   { title: 'Team', href:"/web/team" },
   { title: 'Contact Us', href:"/web/contactus" },
 ];
-const webheader = () => {
+const Webheader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
@@ -89,4 +89,4 @@ const webheader = () => {
   );
 };
 
-export default webheader;
+export default Webheader;

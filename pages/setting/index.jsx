@@ -22,7 +22,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getInitialData } from '@/src/store/global/global.action';
 
-const setting = (props) => {
+const Setting = (props) => {
   const { rights } = props.pageProps;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState('');
@@ -81,7 +81,7 @@ const setting = (props) => {
   );
 };
 
-export default setting;
+export default Setting;
 
 export const GetStaticProps = async () => {
   let rightsDoc = [];

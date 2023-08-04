@@ -65,7 +65,6 @@ const CustomDrawer = (props) => {
   const dispatch = useDispatch();
 
   const getAction = () => {
-
     switch (maintitle) {
       case 'task':
         return {

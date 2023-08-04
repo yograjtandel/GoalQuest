@@ -1,7 +1,8 @@
 import NextAuth from 'next-auth';
 import Auth0Provider from 'next-auth/providers/auth0';
-import { MongoDBAdapter } from '@auth/mongodb-adapter';
-import clientPromise from '../../../lib/mongodb';
+import action from '@/src/utility/action';
+// import { MongoDBAdapter } from '@auth/mongodb-adapter';
+// import clientPromise from '../../../lib/mongodb';
 
 export const authOptions = {
   providers: [
@@ -11,13 +12,31 @@ export const authOptions = {
       issuer: process.env.AUTH0_ISSUER,
     }),
   ],
-  adapter: MongoDBAdapter(clientPromise),
+  //   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      debugger;
+      const res = await action({
+        method: 'get',
+        url: `/v1/user?limit=0&&email=${user.email}`,
+      });
+      debugger;
+      return res.data;
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      debugger;
+      return token;
+    },
     session: async ({ session, token, user }) => {
-      session.role = user.role || 'not_authorised';
-      session.id = user.id;
+      debugger;
+      //   session.role = user.role || 'not_authorised';
+      //   session.id = user.id;
       return Promise.resolve(session);
     },
   },
 };
+// debugger;
 export default NextAuth(authOptions);
