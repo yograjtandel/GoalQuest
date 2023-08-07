@@ -1,6 +1,7 @@
 import { AddIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
-import { v4 as uuidv4 } from "uuid";
-import NextLink from "next/link";
+import { v4 as uuidv4 } from 'uuid';
+import NextLink from 'next/link';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import {
   Box,
   Flex,
@@ -17,19 +18,22 @@ import {
 import logo from '@/public/assets/images/logo.png';
 
 const Links = [
-  { title: 'Home', href:"/web/landingpage" },
-  { title: 'About Us', href:"/web/aboutus" },
-  { title: 'Team', href:"/web/team" },
-  { title: 'Contact Us', href:"/web/contactus" },
+  { title: 'Home', href: '/web/landingpage' },
+  { title: 'About Us', href: '/web/aboutus' },
+  { title: 'Team', href: '/web/team' },
+  { title: 'Contact Us', href: '/web/contactus' },
 ];
 const Webheader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data: session } = useSession();
+
   return (
     <Box
       bg={useColorModeValue('gray.100', 'gray.900')}
       px={4}
       boxShadow="lg"
-      rounded="md">
+      rounded="md"
+    >
       <Container maxW="container.xl">
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <HStack
@@ -40,7 +44,8 @@ const Webheader = () => {
               base: 'space-between',
               sm: 'space-between',
               md: 'space-between',
-            }}>
+            }}
+          >
             <Box>
               <Image src={logo.src} w={'auto'} h={'40px'} alt="logo" />
             </Box>
@@ -49,27 +54,56 @@ const Webheader = () => {
               icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
               aria-label={'Open Menu'}
               display={{ md: 'none' }}
-              onClick={isOpen ? onClose : onOpen}/>
+              onClick={isOpen ? onClose : onOpen}
+            />
             <HStack
               as={'nav'}
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
-              justifyContent={'center'}>
+              justifyContent={'center'}
+            >
               {Links.map((link) => (
-                 <Link as={NextLink} key={uuidv4()} href={link.href}>
-                 {link.title}
-               </Link>
+                <Link as={NextLink} key={uuidv4()} href={link.href}>
+                  {link.title}
+                </Link>
               ))}
             </HStack>
             <Flex
               alignItems={'center'}
-              display={{ base: 'none', sm: 'none', md: 'flex' }}>
-              <Button variant={'solid'} colorScheme={'teal'} size={'sm'} mr={4}>
-                Sign In
-              </Button>
-              <Button variant={'solid'} colorScheme={'teal'} size={'sm'} mr={4}>
-                Sign Up
-              </Button>
+              display={{ base: 'none', sm: 'none', md: 'flex' }}
+            >
+              {!session && (
+                <>
+                  <Button
+                    variant={'solid'}
+                    colorScheme={'teal'}
+                    size={'sm'}
+                    mr={4}
+                    onClick={() => signIn()}
+                  >
+                    Sign In
+                  </Button>
+                  <Button
+                    variant={'solid'}
+                    colorScheme={'teal'}
+                    size={'sm'}
+                    mr={4}
+                  >
+                    Sign Up
+                  </Button>
+                </>
+              )}
+              {session && (
+                <Button
+                  variant={'solid'}
+                  colorScheme={'teal'}
+                  size={'sm'}
+                  mr={4}
+                  onClick={() => signOut()}
+                >
+                  Sign Out
+                </Button>
+              )}
             </Flex>
           </HStack>
         </Flex>

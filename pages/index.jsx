@@ -13,7 +13,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import {
   Box,
   Input,
@@ -27,7 +27,6 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
-import { fetchTaskInitialData } from '@/src/utility/helper';
 
 export default function Home(props) {
   const tasktitle = [
@@ -54,16 +53,6 @@ export default function Home(props) {
     setTodo('');
   };
 
-  const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <Button onClick={() => signOut()}>Sign out</Button>
-      </>
-    );
-  }
-
   return (
     <>
       <Box
@@ -75,19 +64,6 @@ export default function Home(props) {
         boxShadow="xl"
         rounded="md"
       >
-        Not signed in <br />
-        <Button onClick={() => signIn()}>Sign in</Button>
-        <Button
-          onClick={() =>
-            signIn(
-              'auth0',
-              { callbackUrl: 'http://localhost:3000' },
-              { screen_hint: 'signup' }
-            )
-          }
-        >
-          Sign up
-        </Button>
         <Flex w={'100%'} overflowX={'hidden'} p={4}>
           <Box
             w={'100%'}

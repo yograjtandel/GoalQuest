@@ -38,18 +38,18 @@ export const UpdateTaskStage = createAsyncThunk(
   }
 );
 
-export const GetTasks = createAsyncThunk('global/GetTasks', async (data) => {
+export const GetTasks = createAsyncThunk('global/GetTasks', async (session) => {
   const res = await action({
     method: 'get',
-    url: '/v1/task?group=stage',
+    url: `/v1/task?group=stage&&company=${session.data.company}`,
   });
   return res.data;
 });
 
-export const getLogtime = createAsyncThunk('global/getLogtime', async () => {
+export const getLogtime = createAsyncThunk('global/getLogtime', async (session) => {
   const res = await action({
     method: 'get',
-    url: '/v1/timelog',
+    url: `/v1/timelog&&company=${session.data.company}`,
   });
   return res.data;
 });

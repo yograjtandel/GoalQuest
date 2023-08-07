@@ -9,6 +9,7 @@ const initialState = {
   projects: [],
   tags: [],
   users: [],
+  roles: [],
   //   form_state: false,
   initialDataFetched: false,
   active_drop_zone: false,
@@ -28,6 +29,7 @@ const globalSlice = createSlice({
         state.users = [...action.payload.users];
         state.stages = [...action.payload.stags];
         state.managers = [...action.payload.managers];
+        state.roles = [...action.payload.roles];
         state.initialDataFetched = true;
       }
     });

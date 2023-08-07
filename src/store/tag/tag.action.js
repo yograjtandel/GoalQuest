@@ -16,7 +16,7 @@ export const CreateTag = createAsyncThunk(
 export const GetTages = createAsyncThunk('global/GetTages', async (data) => {
     const res = await action({
       method: 'get',
-      url: '/v1/tag?limit=0',
+      url: '/v1/tag?limit=0&&company=${session.data.company}',
     });
     return res.data.results;
   });

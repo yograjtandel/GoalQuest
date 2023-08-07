@@ -49,13 +49,15 @@ const Customtable = (props) => {
   // </Td>
 
   const tableHeading = Headings.map((heading) => <Th>{heading}</Th>);
-  
   const tableRow = data.map((item) => {
     return (
       <Tr key={uuidv4()}>
-        {keys.map((key) => (
-          <Td key={uuidv4()}>{item[key]}</Td>
-        ))}
+        {keys.map((key) => {
+          const [parent, child] = key.split('.');
+          return (
+            <Td key={uuidv4()}>{child ? item[parent][child] : item[parent]}</Td>
+          );
+        })}
       </Tr>
     );
   });

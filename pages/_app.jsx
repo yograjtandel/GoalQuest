@@ -60,7 +60,11 @@ export default function App({ Component, session, ...pageProps }) {
               </Box>
             </Provider>
           )}
-          {router.pathname.startsWith('/web') && <Component {...pageProps} />}
+          {router.pathname.startsWith('/web') && (
+            <>
+              <Component {...pageProps} />
+            </>
+          )}
         </ChakraProvider>
       </NotificationContextProvider>
     </SessionProvider>

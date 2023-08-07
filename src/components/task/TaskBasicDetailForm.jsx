@@ -16,7 +16,6 @@ const TaskBasicDetailForm = (props) => {
       e.target.type === 'date'
         ? new Date(e.target.value).toISOString().split('T')[0]
         : e.target.value;
-debugger
     dispatch(
       UpdateTaskForm({
         value: value,

@@ -11,15 +11,18 @@ import {
   GetProjects,
   UpdateProjectStage,
 } from '@/src/store/project/project.action';
+import { useSession } from 'next-auth/react';
+import { authenticate } from '@/src/utility/helper';
 
 const Project = (props) => {
+  const session = useSession();
   const { projects_grops } = props.pageProps;
   const Projects = useSelector(projects);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(SetProjects(projects_grops));
     const getData = async () => {
-      await dispatch(getInitialData());
+      await dispatch(getInitialData(session));
     };
     getData();
   }, []);
@@ -33,18 +36,13 @@ const Project = (props) => {
         id,
       })
     );
-    await dispatch(GetProjects());
+    await dispatch(GetProjects(session));
   };
 
   const task_list = useMemo(() => {
     return Projects.map((group) => {
       return (
-        <Kanban
-          group={group}
-          name={group._id}
-          key={uuidv4()}
-          onDrop={drop}
-        >
+        <Kanban group={group} name={group._id} key={uuidv4()} onDrop={drop}>
           <CardList group={group} />
         </Kanban>
       );
@@ -60,12 +58,14 @@ const Project = (props) => {
 
 export default Project;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
   let projects_grops = [];
+  const session = await getSession(context);
+  authenticate(session);
   try {
     const res = await action({
       method: 'get',
-      url: '/v1/project?group=stage',
+      url: `/v1/project?group=stage&&company=${session.data.company}`,
     });
     projects_grops = res.data;
   } catch (e) {

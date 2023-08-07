@@ -9,11 +9,14 @@ import { GetTages } from '@/src/store/tag/tag.action';
 import { Tags } from '@/src/store/tag/tag.slice';
 import { Roles } from '@/src/store/role/role.slice';
 import { GetRoles } from '@/src/store/role/role.action';
+import { GetUsers } from '@/src/store/user/user.action';
+import { Users } from '@/src/store/user/user.slice';
 
 const customtab = () => {
   const dispatch = useDispatch();
   const StageData = useSelector(Stages);
   const TagData = useSelector(Tags);
+  const UserData = useSelector(Users);
   const RoleData = useSelector(Roles);
   const [tabIndex, setTabIndex] = useState();
   useEffect(() => {
@@ -44,10 +47,10 @@ const customtab = () => {
     },
     {
       title: 'User',
-      getAction: GetStages,
+      getAction: GetUsers,
       index: 3,
-      data: StageData,
-      heading: { title: 'Title', display_sequence: 'Sequence' },
+      data: UserData,
+      heading: { name: 'Name', email: 'Email', 'role.name': 'Role' },
     },
   ];
 

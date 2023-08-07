@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 
 const LinkItems = [
   { icon: <BiHome />, href: '/', Heading: 'Home' },
-  { icon: <BiHome />, href: '/dashboard', Heading: 'Home' },
   { icon: <BiLayerPlus />, href: '/project', Heading: 'Project' },
   { icon: <BiTask />, href: '/task', Heading: 'Task' },
   { icon: <BiCog />, href: '/setting', Heading: 'Setting' },
