@@ -69,7 +69,7 @@ export const getServerSideProps = async (context) => {
   try {
     const res = await action({
       method: 'get',
-      url: `/v1/task?group=stage&&company=${session.data.company}`,
+      url: `/v1/task?group=stage&&company=${session.company}`,
     });
     task_group = res.data;
   } catch (e) {
