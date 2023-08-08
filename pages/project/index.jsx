@@ -11,7 +11,7 @@ import {
   GetProjects,
   UpdateProjectStage,
 } from '@/src/store/project/project.action';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { authenticate } from '@/src/utility/helper';
 
 const Project = (props) => {

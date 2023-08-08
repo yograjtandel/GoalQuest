@@ -9,7 +9,7 @@ import Kanban from '@/src/components/kanban/Kanban';
 import CardList from '@/src/components/task/CardList';
 import { GetTasks, UpdateTaskStage } from '@/src/store/task/task.action';
 import { globalData } from '@/src/store/global/global.slice';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { authenticate } from '@/src/utility/helper';
 
 const Task = (props) => {
