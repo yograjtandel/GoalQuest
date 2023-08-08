@@ -22,11 +22,11 @@ import {
 } from '@/src/store/project/project.action';
 import { useSession } from 'next-auth/react';
 import { StageFormData, StageOtherData } from '@/src/store/stage/stage.slice';
-import { CreateStage } from '@/src/store/stage/stage.action';
+import { CreateStage, GetStages } from '@/src/store/stage/stage.action';
 import { RoleFormData, RoleOtherData } from '@/src/store/role/role.slice';
-import { CreateRole } from '@/src/store/role/role.action';
+import { CreateRole, GetRoles } from '@/src/store/role/role.action';
 import { TagFormData, TagOtherData } from '@/src/store/tag/tag.slice';
-import { CreateTag } from '@/src/store/tag/tag.action';
+import { CreateTag, GetTages } from '@/src/store/tag/tag.action';
 import {
   ChildTaskFormData,
   ParentTaskFormData,
@@ -43,6 +43,8 @@ import {
   UpdateTask,
   UpdateTimeLog,
 } from '@/src/store/task/task.action';
+import { UserFormData, UserOtherData } from '@/src/store/user/user.slice';
+import { CreateUser, GetUsers } from '@/src/store/user/user.action';
 
 const CustomDrawer = (props) => {
   const { maintitle, isOpen, onClose, btnRef, size, children } = props;
@@ -55,28 +57,30 @@ const CustomDrawer = (props) => {
   const stageFormData = useSelector(StageFormData);
   const roleFormData = useSelector(RoleFormData);
   const tagFormData = useSelector(TagFormData);
+  const userFormData = useSelector(UserFormData);
   const taskOtherData = useSelector(TaskOtherData);
   const stageOtherData = useSelector(StageOtherData);
   const roelOtherData = useSelector(RoleOtherData);
   const tagOtherData = useSelector(TagOtherData);
   const projectOtherData = useSelector(ProjectOtherData);
+  const userOtherData = useSelector(UserOtherData);
 
   const session = useSession();
   const dispatch = useDispatch();
 
   const getAction = () => {
-
     switch (maintitle) {
       case 'task':
         return {
-          data: taskFormData,
+          data: { ...taskFormData, company: session.data.company },
           action:
             taskOtherData.form_mode.task === 'create' ? CreateTask : UpdateTask,
           post_action: GetTasks,
+          post_action_prms: session,
         };
       case 'parent':
         return {
-          data: parentTaskFormData,
+          data: { ...parentTaskFormData, company: session.data.company },
           action:
             taskOtherData.form_mode.parent === 'create'
               ? CreateTask
@@ -85,7 +89,7 @@ const CustomDrawer = (props) => {
         };
       case 'child':
         return {
-          data: childTaskFormData,
+          data: { ...childTaskFormData, company: session.data.company },
           action:
             taskOtherData.form_mode.child === 'create'
               ? CreateTask
@@ -102,29 +106,44 @@ const CustomDrawer = (props) => {
         };
       case 'project':
         return {
-          data: projectFormData,
+          data: { ...projectFormData, company: session.data.company },
           action:
             projectOtherData.form_mode.project === 'create'
               ? CreateProject
               : UpdateProject,
           post_action: GetProjects,
+          post_action_prms: session,
         };
       case 'stage':
         return {
-          data: stageFormData,
+          data: { ...stageFormData, company: session.data.company },
           action:
             stageOtherData.form_mode.stage === 'create' ? CreateStage : false,
+          post_action: GetStages,
+          post_action_prms: session,
         };
       case 'role':
         return {
-          data: roleFormData,
+          data: { ...roleFormData, company: session.data.company },
           action:
             roelOtherData.form_mode.role === 'create' ? CreateRole : false,
+          post_action: GetRoles,
+          post_action_prms: session,
         };
       case 'tag':
         return {
-          data: tagFormData,
+          data: { ...tagFormData, company: session.data.company },
           action: tagOtherData.form_mode.tag === 'create' ? CreateTag : false,
+          post_action: GetTages,
+          post_action_prms: session,
+        };
+      case 'user':
+        return {
+          data: { ...userFormData, company: session.data.company },
+          action:
+            userOtherData.form_mode.user === 'create' ? CreateUser : false,
+          post_action: GetUsers,
+          post_action_prms: session,
         };
     }
   };
@@ -154,11 +173,11 @@ const CustomDrawer = (props) => {
     e.preventDefault();
     e.stopPropagation();
 
-    const { action, data, post_action } = getAction();
+    const { action, data, post_action, post_action_prms } = getAction();
 
     await dispatch(action({ ...data, createdBy: session.data.id }));
     if (post_action) {
-      dispatch(post_action());
+      dispatch(post_action(post_action_prms));
     }
     dialogCloseHandler();
   };

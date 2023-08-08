@@ -4,10 +4,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getInitialData = createAsyncThunk(
   'global/getInitialData',
-  async (arg, { getState }) => {
+  async (session, { getState }) => {
     const state = getState();
     if (!state.global.initialDataFetched) {
-      const res = await fetchTaskInitialData();
+      const res = await fetchTaskInitialData(session);
       return res;
     }
     return state;

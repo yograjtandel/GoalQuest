@@ -53,15 +53,17 @@ const CustomCard = (props) => {
       >
         <CardBody>{children}</CardBody>
       </Card>
-      <CustomDrawer
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-        maintitle={title}
-        size={drawer_size}
-      >
-        {onClickDispaly}
-      </CustomDrawer>
+      {openDrawer !== false && (
+        <CustomDrawer
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onClose={onClose}
+          maintitle={title}
+          size={drawer_size}
+        >
+          {onClickDispaly}
+        </CustomDrawer>
+      )}
     </>
   );
 };

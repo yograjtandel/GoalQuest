@@ -7,19 +7,22 @@ import {
 } from '@/src/store/tag/tag.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { InputWrapper } from '../form';
+import { useEffect } from 'react';
 
 const Tag = () => {
   const FormData = useSelector(TagFormData);
+  const { mode } = props;
   const dispatch = useDispatch();
-  const otherTaskFormData = useSelector(TagOtherData);
 
-  const fieldChangeHandler = (e) => {
+  useEffect(() => {
     dispatch(
       SetFormMode({
-        ...otherTaskFormData.form_mode,
-        stage: mode,
+        role: mode,
       })
     );
+  }, []);
+
+  const fieldChangeHandler = (e) => {
     dispatch(
       UpdateTagForm({
         value: e.target.value,

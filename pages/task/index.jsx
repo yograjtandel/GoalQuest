@@ -9,17 +9,20 @@ import Kanban from '@/src/components/kanban/Kanban';
 import CardList from '@/src/components/task/CardList';
 import { GetTasks, UpdateTaskStage } from '@/src/store/task/task.action';
 import { globalData } from '@/src/store/global/global.slice';
+import { useSession } from 'next-auth/react';
+import { authenticate } from '@/src/utility/helper';
 
 const Task = (props) => {
   const { task_group } = props.pageProps;
   const Tasks = useSelector(tasks);
   const { stages } = useSelector(globalData);
   const dispatch = useDispatch();
+  const session = useSession();
 
   useEffect(() => {
     dispatch(SetTasks(task_group));
     const getData = async () => {
-      await dispatch(getInitialData());
+      await dispatch(getInitialData(session));
     };
     getData();
   }, []);
@@ -33,7 +36,7 @@ const Task = (props) => {
         id,
       })
     );
-    await dispatch(GetTasks());
+    await dispatch(GetTasks(session));
   };
 
   const task_list = useMemo(() => {
@@ -59,12 +62,14 @@ const Task = (props) => {
 };
 export default Task;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
   let task_group = [];
+  const session = await getSession(context);
+  authenticate(session);
   try {
     const res = await action({
       method: 'get',
-      url: '/v1/task?group=stage',
+      url: `/v1/task?group=stage&&company=${session.company}`,
     });
     task_group = res.data;
   } catch (e) {

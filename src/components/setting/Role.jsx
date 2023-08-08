@@ -1,26 +1,30 @@
 import { Box, Checkbox, Input } from '@chakra-ui/react';
 import { InputWrapper } from '../form';
-import { RoleOtherData, UpdateRoleForm } from '@/src/store/role/role.slice';
+import {
+  RoleOtherData,
+  SetFormMode,
+  UpdateRoleForm,
+} from '@/src/store/role/role.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RoleFormData } from '@/src/store/role/role.slice';
 import { useEffect } from 'react';
+import { globalData } from '@/src/store/global/global.slice';
+// import { setFormMode, updateRoleForm } from '@/src/store/role/role.reducers';
 
 const Role = (props) => {
   const { rights, mode } = props;
   const FormData = useSelector(RoleFormData);
   const dispatch = useDispatch();
-  const otherTaskFormData = useSelector(RoleOtherData);
-  
 
-  useEffect(() => {}, []);
-
-  const fieldChangeHandler = (e) => {
+  useEffect(() => {
     dispatch(
       SetFormMode({
-        ...otherTaskFormData.form_mode,
         role: mode,
       })
     );
+  }, []);
+
+  const fieldChangeHandler = (e) => {
     dispatch(
       UpdateRoleForm({
         value: e.target.value,

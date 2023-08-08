@@ -16,7 +16,7 @@ export const CreateStage = createAsyncThunk(
 export const GetStages = createAsyncThunk('global/GetStages', async (data) => {
   const res = await action({
     method: 'get',
-    url: '/v1/stage?limit=0',
+    url: `/v1/stage?limit=0&&company=${session.data.company}`,
   });
   return res.data.results;
 });

@@ -40,10 +40,10 @@ export const UpdateProjectStage = createAsyncThunk(
 
 export const GetProjects = createAsyncThunk(
   'global/GetProjects',
-  async (data) => {
+  async (session) => {
     const res = await action({
       method: 'get',
-      url: '/v1/project?group=stage',
+      url: `/v1/project?group=stage?company=${session.data.company}`,
     });
     return res.data;
   }

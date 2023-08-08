@@ -1,3 +1,4 @@
+import { signIn } from 'next-auth/react';
 import action from './action';
 
 export const getProject = (projects, id) => {
@@ -15,10 +16,10 @@ export const getStage = (Stages, id) => {
   return stage;
 };
 
-export const fetchTaskInitialData = async () => {
+export const fetchTaskInitialData = async (session) => {
   const res = await action({
     method: 'get',
-    url: '/v1/task/taskinitialdata?limit=0',
+    url: `/v1/task/taskinitialdata?limit=0&&company=${session.data.company}`,
   });
   return res.data;
 };
@@ -29,4 +30,11 @@ export const fetchTimelogData = async (id) => {
     url: `/v1/timelog/${id}`,
   });
   return res.data;
+};
+
+export const authenticate = (session) => {
+  if (!session) {
+    signIn();
+  }
+  return;
 };

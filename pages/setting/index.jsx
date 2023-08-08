@@ -21,15 +21,18 @@ import CustomDrawer from '@/src/components/drawer';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getInitialData } from '@/src/store/global/global.action';
+import { getSession, useSession } from 'next-auth/react';
+import { authenticate } from '@/src/utility/helper';
 
-const setting = (props) => {
+const Setting = (props) => {
   const { rights } = props.pageProps;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState('');
+  const session = useSession();
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getInitialData());
+    dispatch(getInitialData(session));
   }, []);
 
   const onMenuClickHAndler = (e) => {
@@ -81,14 +84,16 @@ const setting = (props) => {
   );
 };
 
-export default setting;
+export default Setting;
 
-export const GetStaticProps = async () => {
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+  authenticate(session);
   let rightsDoc = [];
   try {
     const res = await action({
       method: 'get',
-      url: '/v1/rights?limit=0',
+      url: `/v1/rights?limit=0&&company=${session.company}`,
     });
     rightsDoc = res.data.results;
   } catch (e) {

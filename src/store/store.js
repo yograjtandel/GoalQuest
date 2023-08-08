@@ -5,6 +5,8 @@ import projectReducer from './project/project.slice';
 import stageReducer from './stage/stage.slice';
 import roleReducer from './role/role.slice';
 import tageReducer from './tag/tag.slice';
+import userReducer from './user/user.slice';
+
 const store = configureStore({
   reducer: {
     task: taskReducer,
@@ -13,6 +15,7 @@ const store = configureStore({
     stage: stageReducer,
     role: roleReducer,
     tag: tageReducer,
+    user: userReducer,
   },
 });
 

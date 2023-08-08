@@ -1,4 +1,5 @@
 import { InputWrapper } from '@/src/components/form';
+import Webheader from '@/src/components/web/header/Header';
 import {
   Box,
   Button,
@@ -14,7 +15,14 @@ import Link from 'next/link';
 
 const login = () => {
   return (
-    <Box w={'100%'} h={'100%'} minH={'100vh'} border={'1px solid'} overflow={'hidden'}>
+    <Box
+      w={'100%'}
+      h={'100%'}
+      minH={'100vh'}
+      border={'1px solid'}
+      overflow={'hidden'}
+    >
+      <Webheader />
       <Container
         maxW="container.lg"
         display={'flex'}
@@ -35,13 +43,12 @@ const login = () => {
             <InputWrapper title="Password">
               <Input type="password" placeholder="*******"></Input>
             </InputWrapper>
+            <InputWrapper title="Re-Enter Password">
+              <Input type="password" placeholder="*******"></Input>
+            </InputWrapper>
             <Flex w={'100%'} mt={'4'} flexDirection={'column'}>
-              <Box>
-                {' '}
-                <Link href={'#'}>Forgot Password?</Link>
-              </Box>
               <Button mt={4} w={'100%'} colorScheme="blue">
-                Login
+                SignUp
               </Button>
             </Flex>
           </CardBody>

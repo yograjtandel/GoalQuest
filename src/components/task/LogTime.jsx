@@ -6,7 +6,6 @@ import { UpdateTaskForm } from '@/src/store/task/task.slice';
 import { globalData } from '@/src/store/global/global.slice';
 const LogTime = (props) => {
   const { data: FormData, parent_key } = props;
-  debugger;
   const globalFormData = useSelector(globalData);
   const { users } = globalFormData;
   const dispatch = useDispatch();

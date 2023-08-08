@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import Theme from '../src/theme/index';
 import '../public/assets/css/style.css';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import store from '@/src/store/store';
 import { SessionProvider } from 'next-auth/react';
 import { NotificationContextProvider } from '@/src/store/context/Notification';
@@ -13,23 +13,15 @@ import Header from '../src/components/header';
 import Notification from '@/src/components/ui/Notification';
 
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { getInitialData } from '@/src/store/global/global.action';
 
 export default function App({ Component, session, ...pageProps }) {
-  const [isWeb, setIsWeb] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (router.pathname.startsWith('/web')) {
-      setIsWeb(true);
-    }
-  }, []);
   return (
     <SessionProvider session={session}>
       <NotificationContextProvider>
         <ChakraProvider theme={Theme}>
-          {!isWeb && (
+          {!router.pathname.startsWith('/web') && (
             <Provider store={store}>
               <Notification />
               <Box w="100%" h={'100%'} minH={'100vh'}>
@@ -68,7 +60,11 @@ export default function App({ Component, session, ...pageProps }) {
               </Box>
             </Provider>
           )}
-          {isWeb && <Component {...pageProps} />}
+          {router.pathname.startsWith('/web') && (
+            <>
+              <Component {...pageProps} />
+            </>
+          )}
         </ChakraProvider>
       </NotificationContextProvider>
     </SessionProvider>
