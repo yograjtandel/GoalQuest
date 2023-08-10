@@ -32,7 +32,7 @@ const Setting = (props) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getInitialData(session));
+
   }, []);
 
   const onMenuClickHAndler = (e) => {

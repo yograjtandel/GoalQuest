@@ -23,7 +23,7 @@ const globalSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getInitialData.fulfilled, (state, action) => {
-      if (!state.initialDataFetched) {
+        if (!state.initialDataFetched) {
         state.projects = [...action.payload.projects];
         state.tags = [...action.payload.tags];
         state.users = [...action.payload.users];

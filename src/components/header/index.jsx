@@ -107,7 +107,7 @@ const Header = (props) => {
         onClose={onClose}
         maintitle={title}
       >
-        {title === 'task' && <NewTask />}
+        {title === 'task' && <NewTask mode="create"/>}
         {title === 'project' && <NewProject stages={stages} mode="create" />}
       </CustomDrawer>
     </>

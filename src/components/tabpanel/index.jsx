@@ -1,61 +1,58 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import Customtable from '../table';
-import { GetStages } from '@/src/store/stage/stage.action';
 import { useDispatch, useSelector } from 'react-redux';
-import { Stages } from '@/src/store/stage/stage.slice';
 import { useEffect, useState } from 'react';
-import { GetTages } from '@/src/store/tag/tag.action';
-import { Tags } from '@/src/store/tag/tag.slice';
-import { Roles } from '@/src/store/role/role.slice';
-import { GetRoles } from '@/src/store/role/role.action';
-import { GetUsers } from '@/src/store/user/user.action';
-import { Users } from '@/src/store/user/user.slice';
+import { globalData } from '@/src/store/global/global.slice';
+import { getInitialData } from '@/src/store/global/global.action';
+import {  useSession } from 'next-auth/react';
 
-const customtab = () => {
+const Customtab = () => {
   const dispatch = useDispatch();
-  const StageData = useSelector(Stages);
-  const TagData = useSelector(Tags);
-  const UserData = useSelector(Users);
-  const RoleData = useSelector(Roles);
+  const { users, tags, stages, managers, roles } = useSelector(globalData);
   const [tabIndex, setTabIndex] = useState();
+  const session = useSession();
+
   useEffect(() => {
+    const getData = async () => {
+      await dispatch(getInitialData(session));
+    };
+    if (session.data) {
+      getData();
+    }
+
     handleTabsChange(0);
-  }, []);
+  }, [session]);
 
   const tabs = [
     {
       title: 'Stage',
-      getAction: GetStages,
       index: 0,
-      data: StageData,
+      data: stages || [],
       heading: { title: 'Title', display_sequence: 'Sequence' },
     },
     {
       title: 'Tags',
-      getAction: GetTages,
       index: 1,
-      data: TagData,
+      data: tags || [],
       heading: { title: 'Title' },
     },
     {
       title: 'Roles',
-      getAction: GetRoles,
+
       index: 2,
-      data: RoleData,
+      data: roles || [],
       heading: { name: 'Name' },
     },
     {
       title: 'User',
-      getAction: GetUsers,
       index: 3,
-      data: UserData,
+      data: [...users, ...managers],
       heading: { name: 'Name', email: 'Email', 'role.name': 'Role' },
     },
   ];
 
   const handleTabsChange = async (index) => {
-    await dispatch(tabs.find((tab) => tab.index === index).getAction());
     setTabIndex(index);
   };
 
@@ -68,21 +65,27 @@ const customtab = () => {
       onChange={handleTabsChange}
     >
       <TabList>
-        {tabs.map((tasktitle) => (
-          <Tab textAlign={'start'} key={uuidv4()}>
-            {tasktitle.title}
-          </Tab>
-        ))}
+        {tabs
+          .sort((a, b) => a.index - b.index)
+          .map((tasktitle) => (
+            <Tab textAlign={'start'} key={uuidv4()}>
+              {tasktitle.title}
+            </Tab>
+          ))}
       </TabList>
       <TabPanels w={'100%'}>
-        {tabs.map((tab) => (
-          <TabPanel key={uuidv4()}>
-            <Customtable data={tab.data} heading={tab.heading} />
-          </TabPanel>
-        ))}
+        {tabs
+          .sort((a, b) => a.index - b.index)
+          .map((tab) => {
+            return (
+              <TabPanel key={uuidv4()}>
+                {<Customtable data={tab.data} heading={tab.heading} />}
+              </TabPanel>
+            );
+          })}
       </TabPanels>
     </Tabs>
   );
 };
 
-export default customtab;
+export default Customtab;

@@ -24,8 +24,10 @@ const Project = (props) => {
     const getData = async () => {
       await dispatch(getInitialData(session));
     };
-    getData();
-  }, []);
+    if (session.data) {
+      getData();
+    }
+  }, [session]);
 
   const drop = async (e) => {
     let id = e.dataTransfer.getData('project_id');

@@ -18,6 +18,14 @@ const NewProject = (props) => {
   const projectOtherData = useSelector(ProjectOtherData);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(
+      SetFormMode({
+        project: mode,
+      })
+    );
+  }, []);
+
   const stageOptions = stages.map((stage) => {
     return (
       <option value={stage.id} key={stage.id}>

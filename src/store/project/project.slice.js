@@ -19,7 +19,7 @@ const projectSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(CreateProject.fulfilled, (state, action) => {
-      //   state.managers = [...action.payload];
+      state.projects = [...state.projects, action.payload];
     });
     builder.addCase(GetProjects.fulfilled, (state, action) => {
       state.projects = action.payload;

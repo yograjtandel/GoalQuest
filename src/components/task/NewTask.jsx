@@ -41,7 +41,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProject } from '@/src/utility/helper';
 import { globalData } from '@/src/store/global/global.slice';
 
-const NewTask = () => {
+const NewTask = (props) => {
+  const { mode } = props;
   const [maintitle, setTitle] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLogtime, setIsLogtime] = useState(false);
@@ -57,6 +58,14 @@ const NewTask = () => {
   const TimeLogs = useSelector(timeLogs);
 
   const { projects } = globalFormData;
+
+  useEffect(() => {
+    dispatch(
+      SetFormMode({
+        task: mode,
+      })
+    );
+  }, []);
 
   const parentTaskHandler = (e) => {
     setIsLogtime(false);

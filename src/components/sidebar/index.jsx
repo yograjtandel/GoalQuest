@@ -8,20 +8,18 @@ import { UpdateHeading } from '@/src/store/global/global.slice';
 import { useDispatch } from 'react-redux';
 
 const LinkItems = [
-  { icon: <BiHome />, href: '/', Heading: 'Home' },
-  { icon: <BiLayerPlus />, href: '/project', Heading: 'Project' },
-  { icon: <BiTask />, href: '/task', Heading: 'Task' },
-  { icon: <BiCog />, href: '/setting', Heading: 'Setting' },
+  { icon: <BiHome />, href: '/', heading: 'Home' },
+  { icon: <BiLayerPlus />, href: '/project', heading: 'Project' },
+  { icon: <BiTask />, href: '/task', heading: 'Task' },
+  { icon: <BiCog />, href: '/setting', heading: 'Setting' },
 ];
 const Sidebar = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(
-      UpdateHeading(
-        LinkItems.find((link) => document.location.pathname === link.href)
-          .Heading
-      )
+    const Link = LinkItems.find(
+      (link) => document.location.pathname === link.href
     );
+    dispatch(UpdateHeading(Link?.heading || 'Not Found'));
   }, []);
 
   return (

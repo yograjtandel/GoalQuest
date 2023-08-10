@@ -6,7 +6,6 @@ import {
   Th,
   Td,
   TableContainer,
-  Button,
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
@@ -15,7 +14,6 @@ const Customtable = (props) => {
   const [keys, setKeys] = useState([]);
   const [Headings, setHeadings] = useState([]);
   const { data, heading } = props;
-
   useEffect(() => {
     const { key, Headings } = Object.keys(heading).reduce(
       (acc, curr) => {
@@ -55,7 +53,9 @@ const Customtable = (props) => {
         {keys.map((key) => {
           const [parent, child] = key.split('.');
           return (
-            <Td key={uuidv4()}>{child ? item[parent][child] : item[parent]}</Td>
+            <Td key={uuidv4()}>
+              {child && item.length ? item[parent][child] : item[parent]}
+            </Td>
           );
         })}
       </Tr>

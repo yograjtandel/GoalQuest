@@ -9,7 +9,8 @@ export const CreateProject = createAsyncThunk(
       url: '/v1/project',
       data,
     });
-    return res.data.results;
+    debugger
+    return res.data;
   }
 );
 

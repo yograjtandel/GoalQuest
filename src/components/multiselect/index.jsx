@@ -10,7 +10,6 @@ const options = [
 const multiselect = () => {
   const [value, setValue] = useState([]);
   const onChange = (e) => {
-    debugger;
   };
   return (
     <MultiSelect

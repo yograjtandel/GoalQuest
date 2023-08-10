@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import CustomCard from '@/src/components/card';
-import Webheader from '@/src/components/web/header/header';
+import Webheader from '@/src/components/web/header/Header';
 import Webhero from '@/src/components/web/herosection/herosection';
 import { BiShieldAlt2, BiUser, BiNote } from 'react-icons/bi';
 import { HiOutlineUsers } from 'react-icons/hi';
