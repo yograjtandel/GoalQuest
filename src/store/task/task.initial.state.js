@@ -5,7 +5,7 @@ export const initialState = {
   timeLogs: [],
   task: {
     title: '',
-    project_id: '',
+    project: '',
     deadline: new Date().toISOString().split('T')[0],
     description: '',
     priority: '',
@@ -19,7 +19,7 @@ export const initialState = {
   },
   parent_task: {
     title: '',
-    project_id: '',
+    project: '',
     deadline: new Date().toISOString().split('T')[0],
     description: '',
     priority: '',
@@ -30,7 +30,7 @@ export const initialState = {
   },
   child_task: {
     title: '',
-    project_id: '',
+    project: '',
     deadline: new Date().toISOString().split('T')[0],
     description: '',
     priority: '',

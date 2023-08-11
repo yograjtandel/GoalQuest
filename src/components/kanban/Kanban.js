@@ -22,7 +22,6 @@ export default function Kanban(props) {
     e.preventDefault();
     await onDrop(e);
   };
-  debugger
   return (
     <KanbanWrapper name={name}>
       <Flex

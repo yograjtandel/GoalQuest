@@ -38,3 +38,13 @@ export const authenticate = (session) => {
   }
   return;
 };
+
+export const getSelectValue = (str) => {
+  let res;
+  try {
+    res = JSON.parse(str);
+  } catch (e) {
+    return str;
+  }
+  return res;
+};

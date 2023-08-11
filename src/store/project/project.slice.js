@@ -5,7 +5,7 @@ import {
   setProjects,
   setIntialProjectData,
 } from './project.reducers';
-import { CreateProject, GetProjects } from './project.action';
+import { CreateProject, GetProjects, UpdateProject } from './project.action';
 import { initialState } from './project.initial.state';
 
 const projectSlice = createSlice({
@@ -19,8 +19,11 @@ const projectSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(CreateProject.fulfilled, (state, action) => {
-      state.projects = [...state.projects, action.payload];
+      state.projects = action.payload;
     });
+    builder.addCase(UpdateProject.fulfilled, (state, action) => {
+        state.projects = action.payload;
+      });
     builder.addCase(GetProjects.fulfilled, (state, action) => {
       state.projects = action.payload;
     });

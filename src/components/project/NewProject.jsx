@@ -5,6 +5,7 @@ import {
   SetFormMode,
   ProjectOtherData,
 } from '@/src/store/project/project.slice';
+import { getSelectValue } from '@/src/utility/helper';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -28,15 +29,18 @@ const NewProject = (props) => {
 
   const stageOptions = stages.map((stage) => {
     return (
-      <option value={stage.id} key={stage.id}>
+      <option
+        value={JSON.stringify({ title: stage.title, id: stage.id })}
+        key={stage.id}
+      >
         {stage.title}
       </option>
     );
   });
-  const managerOptions = managers.map((stage) => {
+  const managerOptions = managers.map((manager) => {
     return (
-      <option value={stage.id} key={stage.id}>
-        {stage.name}
+      <option value={manager.email} key={manager.id}>
+        {manager.name}
       </option>
     );
   });
@@ -44,7 +48,10 @@ const NewProject = (props) => {
   const fieldChangeHandler = (e) => {
     dispatch(
       UpdateProjectForm({
-        value: e.target.value,
+        value:
+          e.target.type === 'select-one'
+            ? getSelectValue(e.target.value)
+            : e.target.value,
         key: e.target.name,
       })
     );
@@ -82,7 +89,7 @@ const NewProject = (props) => {
         <Select
           placeholder="Select option"
           name="stage"
-          value={FormData.stage}
+          value={JSON.stringify(FormData.stage)}
           onChange={(e) => fieldChangeHandler(e)}
         >
           {stageOptions}

@@ -22,10 +22,12 @@ const Task = (props) => {
   useEffect(() => {
     dispatch(SetTasks(task_group));
     const getData = async () => {
-      await dispatch(getInitialData(session));
-    };
-    getData();
-  }, []);
+        await dispatch(getInitialData(session));
+      };
+      if (session.data) {
+        getData();
+      }
+  }, [session]);
 
   const drop = async (e) => {
     let id = e.dataTransfer.getData('task_id');

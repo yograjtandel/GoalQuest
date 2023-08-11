@@ -75,8 +75,8 @@ const CustomDrawer = (props) => {
           data: { ...taskFormData, company: session.data.company },
           action:
             taskOtherData.form_mode.task === 'create' ? CreateTask : UpdateTask,
-        //   post_action: GetTasks,
-        //   post_action_prms: session,
+          //   post_action: GetTasks,
+          //   post_action_prms: session,
         };
       case 'parent':
         return {
@@ -85,7 +85,7 @@ const CustomDrawer = (props) => {
             taskOtherData.form_mode.parent === 'create'
               ? CreateTask
               : UpdateTask,
-        //   post_action: UpdateTask,
+          //   post_action: UpdateTask,
         };
       case 'child':
         return {
@@ -94,7 +94,7 @@ const CustomDrawer = (props) => {
             taskOtherData.form_mode.child === 'create'
               ? CreateTask
               : UpdateTask,
-        //   post_action: UpdateTask,
+          //   post_action: UpdateTask,
         };
       case 'logtime':
         return {
@@ -105,46 +105,45 @@ const CustomDrawer = (props) => {
               : UpdateTimeLog,
         };
       case 'project':
-        debugger
         return {
           data: { ...projectFormData, company: session.data.company },
           action:
             projectOtherData.form_mode.project === 'create'
               ? CreateProject
               : UpdateProject,
-        //   post_action: GetProjects,
-        //   post_action_prms: session,
+          //   post_action: GetProjects,
+          //   post_action_prms: session,
         };
       case 'stage':
         return {
           data: { ...stageFormData, company: session.data.company },
           action:
             stageOtherData.form_mode.stage === 'create' ? CreateStage : false,
-        //   post_action: GetStages,
-        //   post_action_prms: session,
+          //   post_action: GetStages,
+          //   post_action_prms: session,
         };
       case 'role':
         return {
           data: { ...roleFormData, company: session.data.company },
           action:
             roelOtherData.form_mode.role === 'create' ? CreateRole : false,
-        //   post_action: GetRoles,
-        //   post_action_prms: session,
+          //   post_action: GetRoles,
+          //   post_action_prms: session,
         };
       case 'tag':
         return {
           data: { ...tagFormData, company: session.data.company },
           action: tagOtherData.form_mode.tag === 'create' ? CreateTag : false,
-        //   post_action: GetTages,
-        //   post_action_prms: session,
+          //   post_action: GetTages,
+          //   post_action_prms: session,
         };
       case 'user':
         return {
           data: { ...userFormData, company: session.data.company },
           action:
             userOtherData.form_mode.user === 'create' ? CreateUser : false,
-        //   post_action: GetUsers,
-        //   post_action_prms: session,
+          //   post_action: GetUsers,
+          //   post_action_prms: session,
         };
     }
   };
@@ -175,8 +174,7 @@ const CustomDrawer = (props) => {
     e.stopPropagation();
 
     const { action, data, post_action, post_action_prms } = getAction();
-debugger
-    await dispatch(action({ ...data, createdBy: session.data.id }));
+    await dispatch(action({ ...data, createdBy: session.data.email }));
     if (post_action) {
       dispatch(post_action(post_action_prms));
     }

@@ -1,16 +1,36 @@
 import action from '@/src/utility/action';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+const findGroupIndex = (projects, id) =>
+  projects.findIndex((project) => id === project._id);
+
+const setGroupProjects = (projects, group_index, data) => {
+  projects[group_index] = {
+    ...projects[group_index],
+    projects: [...data],
+  };
+  return projects;
+};
+
 export const CreateProject = createAsyncThunk(
   'global/CreateProject',
-  async (data) => {
+  async (data, { getState }) => {
+    const state = getState();
     const res = await action({
       method: 'post',
       url: '/v1/project',
       data,
     });
-    debugger
-    return res.data;
+    const group_index = findGroupIndex(
+      state.project.projects,
+      res.data.stage.id
+    );
+    const projects = [...state.project.projects];
+
+    return setGroupProjects(projects, group_index, [
+      ...projects[group_index].projects,
+      res.data,
+    ]);
   }
 );
 
@@ -23,7 +43,24 @@ export const UpdateProject = createAsyncThunk(
       url: `/v1/project/${state.project.form._id}`,
       data: state.project.form,
     });
-    return res.data;
+
+    const groupIndex = findGroupIndex(
+      state.project.projects,
+      res.data.stage.id
+    );
+    const group_projects = [...state.project.projects[groupIndex].projects];
+    const projectIndex = group_projects.findIndex(
+      (project) => res.data.id === project._id
+    );
+
+    group_projects[projectIndex] = {
+      ...group_projects[projectIndex],
+      ...res.data,
+    };
+
+    const projects = [...state.project.projects];
+
+    return setGroupProjects(projects, groupIndex, [...group_projects]);
   }
 );
 

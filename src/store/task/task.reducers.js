@@ -1,9 +1,11 @@
 export const updateTaskForm = (state, action) => {
   const { key, parent_key, value } = action.payload;
+//   debugger;
   if (parent_key) {
     state[parent_key] = { ...state[parent_key], [key]: value };
     return;
   }
+  //   if(key==="assi")
   state[key] = { ...state[key], ...value };
 };
 

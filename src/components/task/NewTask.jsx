@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import CustomDrawer from '../drawer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LogTime, TaskBasicDetailForm } from './index';
 import CustomCard from '../card';
 import { AddIcon } from '@chakra-ui/icons';
@@ -148,7 +148,7 @@ const NewTask = (props) => {
           />
         }
         key={uuidv4()}
-      >
+      > 
         <Text fontWeight={'400'}> {task.title}</Text>
         <Text fontWeight={'400'} fontSize={'14px'} color={'gray.500'}>
           {project.name}
