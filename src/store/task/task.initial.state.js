@@ -10,7 +10,7 @@ export const initialState = {
     description: '',
     priority: '',
     createdBy: '',
-    asignee: [],
+    assignee: [],
     stage: '',
     tag: '',
     parent_task: [],

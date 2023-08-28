@@ -6,8 +6,8 @@ export const getProject = (projects, id) => {
   return project;
 };
 
-export const getManager = (managers, id) => {
-  const manager = managers.find((manager) => manager.id === id);
+export const getManager = (managers, email) => {
+  const manager = managers.find((manager) => manager.email === email);
   return manager;
 };
 

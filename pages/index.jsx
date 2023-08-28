@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import useAction from '@/src/hooks/use-Action';
-import Multiselect from '@/src/components/multiselect/index';
+import Multiselect from '@/src/components/form/multiselect';
 import Card from '@/src/components/card';
 import {
   Button,
@@ -26,7 +26,9 @@ import {
   List,
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getInitialData } from '@/src/store/global/global.action';
 
 export default function Home(props) {
   const tasktitle = [
@@ -48,6 +50,17 @@ export default function Home(props) {
   const { Action, Response, Error } = useAction();
   const [Todo, setTodo] = useState('');
   const [data, setState] = useState([]);
+  const dispatch = useDispatch();
+  const session = useSession();
+
+  useEffect(() => {
+    const getData = async () => {
+      await dispatch(getInitialData(session));
+    };
+    if (session.data) {
+      getData();
+    }
+  }, [session]);
   const clickHandler = () => {
     setState((prev) => [...prev, Todo]);
     setTodo('');

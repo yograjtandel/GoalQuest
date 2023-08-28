@@ -34,6 +34,8 @@ const TaskBasicDetailForm = (props) => {
 
   const MultiselectChangeHandler = (args) => {
     const { value, key } = args;
+    debugger;
+    setAssignee((prev) => [...prev, ...value]);
     dispatch(
       UpdateTaskForm({
         value: value,
@@ -96,8 +98,8 @@ const TaskBasicDetailForm = (props) => {
       <InputWrapper title="Project">
         <Select
           placeholder="Select option"
-          name="project_id"
-          value={JSON.stringify(FormData.project_id)}
+          name="project"
+          value={JSON.stringify(FormData.project)}
           onChange={(e) => fieldChangeHandler(e)}
         >
           {projectOptions}
@@ -118,9 +120,9 @@ const TaskBasicDetailForm = (props) => {
           options={usersOptions}
           value={assignee}
           //   value={FormData.asignee}
-          onChange={setAssignee}
-          //   onChange={MultiselectChangeHandler}
-          //   state_key={'assignee'}
+          //   onChange={setAssignee}
+          onChange={MultiselectChangeHandler}
+          state_key={'assignee'}
           //   parent_key="task"
         />
         {/*<Select

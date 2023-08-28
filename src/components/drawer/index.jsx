@@ -131,6 +131,7 @@ const CustomDrawer = (props) => {
           //   post_action_prms: session,
         };
       case 'tag':
+        debugger
         return {
           data: { ...tagFormData, company: session.data.company },
           action: tagOtherData.form_mode.tag === 'create' ? CreateTag : false,
@@ -174,6 +175,7 @@ const CustomDrawer = (props) => {
     e.stopPropagation();
 
     const { action, data, post_action, post_action_prms } = getAction();
+    debugger
     await dispatch(action({ ...data, createdBy: session.data.email }));
     if (post_action) {
       dispatch(post_action(post_action_prms));

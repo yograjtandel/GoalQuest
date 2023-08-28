@@ -11,8 +11,9 @@ const Multiselect = (props) => {
       options={options}
       value={value}
       onChange={(e) => {
-        // return onChange({ value: e, key: state_key });
-        return onChange(e);
+        debugger
+        return onChange({ value: e, key: state_key });
+        // return onChange(e);
       }}
     />
     // <MultiSelect

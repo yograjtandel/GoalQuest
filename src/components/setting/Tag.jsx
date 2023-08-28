@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { InputWrapper } from '../form';
 import { useEffect } from 'react';
 
-const Tag = () => {
+const Tag = (props) => {
   const FormData = useSelector(TagFormData);
   const { mode } = props;
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Tag = () => {
   useEffect(() => {
     dispatch(
       SetFormMode({
-        role: mode,
+        tag: mode,
       })
     );
   }, []);

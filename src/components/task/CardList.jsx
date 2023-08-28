@@ -33,7 +33,8 @@ export default function CardList(props) {
     if (projects.length === 0) {
       return;
     }
-    const project = getProject(projects, task.project_id);
+    debugger;
+    const project = getProject(projects, task.project.id);
     const manager = getManager(managers, project.manager);
 
     return (
